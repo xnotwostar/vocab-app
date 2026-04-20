@@ -151,10 +151,11 @@ function renderCard() {
         </button>
       </div>
 
-      <div class="word-wrap">
+      <div class="word-wrap" id="word-wrap">
         <h1 class="word">${escapeHtml(w.word)}</h1>
         ${w.phonetic ? `<div class="phonetic">${escapeHtml(w.phonetic)}</div>` : ''}
         ${w.difficulty ? `<div class="pos"><span class="tick"></span><span>${'⭐'.repeat(w.difficulty)}</span><span class="tick"></span></div>` : ''}
+        <div class="tap-hint" id="tap-hint">点一下屏幕或按 <kbd class="kbd-inline">Space</kbd> 查看释义</div>
       </div>
 
       <section class="revealed" id="revealed" style="display:none" aria-hidden="true">
@@ -178,10 +179,25 @@ function renderCard() {
       </div>
     </div>`;
 
-  document.getElementById('btn-speak').addEventListener('click', () => playAudio(w));
-  document.querySelectorAll('.grade').forEach(b => {
-    b.addEventListener('click', () => grade(b.dataset.key === '2'));
+  document.getElementById('btn-speak').addEventListener('click', (e) => {
+    e.stopPropagation();
+    playAudio(w);
   });
+  document.querySelectorAll('.grade').forEach(b => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
+      grade(b.dataset.key === '2');
+    });
+  });
+
+  // Tap anywhere on card (except buttons) to reveal
+  const cardFrame = stage.querySelector('.card-frame');
+  if (cardFrame) {
+    cardFrame.addEventListener('click', (e) => {
+      if (e.target.closest('button, a')) return;
+      if (!revealed) reveal();
+    });
+  }
 
   if (prev) {
     fsrsMetaEl.textContent = `Box ${prev.box} · ${prev.remembered}✓ ${prev.forgot}✗ · reps=${prev.reps}`;
@@ -253,8 +269,10 @@ function reveal() {
   revealed = true;
   const r = document.getElementById('revealed');
   const g = document.getElementById('grades');
+  const hint = document.getElementById('tap-hint');
   if (r) { r.style.display = ''; r.setAttribute('aria-hidden', 'false'); }
   if (g) g.style.display = '';
+  if (hint) hint.style.display = 'none';
 }
 
 function grade(remembered) {

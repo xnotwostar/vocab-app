@@ -305,6 +305,32 @@ body::before {
 .empty p { font-family: var(--serif); font-size: 17px; color: var(--ink-dim); max-width: 460px; line-height: 1.6; }
 .empty .amber-accent { color: var(--amber); }
 
+/* ---------- Tap-to-reveal hint ---------- */
+.card-frame { cursor: pointer; }
+.card-frame button { cursor: pointer; }
+.tap-hint {
+  margin-top: 36px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  opacity: 0;
+  animation: fadeInHint 600ms ease 600ms forwards;
+}
+.tap-hint .kbd-inline {
+  display: inline-block;
+  padding: 1px 5px;
+  margin: 0 2px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 3px;
+  font-size: 9px;
+  color: var(--ink-dim);
+}
+@keyframes fadeInHint {
+  to { opacity: 1; }
+}
+
 /* ---------- Leech badge ---------- */
 .leech-badge {
   display: inline-block;
@@ -359,9 +385,10 @@ input:focus-visible {
   .meaning { font-size: 20px; }
   .example { font-size: 15px; }
   .grades { margin-top: 40px; }
-  .grade { padding: 18px 10px 14px; }
-  .grade .glabel { font-size: 18px; }
+  .grade { padding: 22px 10px 18px; min-height: 72px; }
+  .grade .glabel { font-size: 20px; }
   .grade .gmeta { font-size: 9px; }
+  .tap-hint { margin-top: 28px; font-size: 11px; }
 
   .enrichment { margin-top: 28px; padding-top: 20px; }
   .enrich-section.side-by-side { grid-template-columns: 1fr; gap: 20px; }
