@@ -179,24 +179,16 @@ export function getTodayPlan(words, state) {
     const cs = state[w.id];
     return cs && isDue(cs, now);
   });
-  const newCandidates = words.filter(w => !state[w.id]);
-
+  // All unseen words go into today's plan — no throttling.
+  // User-added = user wants to learn. Pace is controlled by user stopping when they want.
+  const newWords = words.filter(w => !state[w.id]);
   const retention = computeRetention14d(state);
-  let newLimit;
-  if (retention === null) newLimit = 10;
-  else if (retention >= 0.85) newLimit = 8;
-  else if (retention >= 0.75) newLimit = 5;
-  else if (retention >= 0.60) newLimit = 3;
-  else newLimit = 0;
-
-  const todayNew = newCandidates.slice(0, newLimit);
 
   const plan = {
     date: todayKey(),
     due_ids: reviewDue.map(w => w.id),
-    new_ids: todayNew.map(w => w.id),
+    new_ids: newWords.map(w => w.id),
     retention_14d: retention,
-    new_limit: newLimit,
     completed_ids: [],
   };
   localStorage.setItem(key, JSON.stringify(plan));

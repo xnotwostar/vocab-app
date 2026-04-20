@@ -69,8 +69,8 @@ function renderPlan(plan, total, done) {
 
   const pct = total ? Math.round(done / total * 100) : 0;
   const newText = plan.new_ids.length > 0
-    ? `<span class="em">${plan.new_ids.length}</span> new (paced by retention)`
-    : `0 new cards today (保持率低于 60%，专注复习)`;
+    ? `<span class="em">${plan.new_ids.length}</span> new`
+    : `no new words`;
 
   container.innerHTML = `
     <div class="plan">
