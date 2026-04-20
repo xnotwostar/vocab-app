@@ -304,3 +304,106 @@ body::before {
 }
 .empty p { font-family: var(--serif); font-size: 17px; color: var(--ink-dim); max-width: 460px; line-height: 1.6; }
 .empty .amber-accent { color: var(--amber); }
+
+/* ---------- Leech badge ---------- */
+.leech-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  margin-left: 12px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--bad);
+  border: 1px solid var(--bad);
+  border-radius: 2px;
+  background: var(--bad-ghost);
+  vertical-align: middle;
+}
+.leech-badge-sm {
+  display: inline-block;
+  padding: 1px 6px;
+  margin-left: 8px;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--bad);
+  border: 1px solid var(--bad);
+  border-radius: 2px;
+  vertical-align: middle;
+}
+
+/* ---------- Accessibility: focus indicators ---------- */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* ---------- Mobile responsive ---------- */
+@media (max-width: 768px) {
+  .topbar { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
+  .topbar .nav { order: 3; width: 100%; justify-content: center; gap: 20px; }
+  .session-meta { font-size: 9px; gap: 12px; }
+
+  .plan-header { padding: 14px 16px 14px; }
+  .plan-date { font-size: 16px; }
+  .plan-count { font-size: 9px; }
+  .plan-metrics { flex-wrap: wrap; gap: 14px; font-size: 9px; }
+
+  .stage { padding: 24px 16px 40px; }
+  .card-chrome { margin-bottom: 28px; }
+  .word { font-size: clamp(40px, 10vw, 72px) !important; }
+  .phonetic { font-size: 16px; }
+  .revealed { margin-top: 32px; }
+  .meaning { font-size: 20px; }
+  .example { font-size: 15px; }
+  .grades { margin-top: 40px; }
+  .grade { padding: 18px 10px 14px; }
+  .grade .glabel { font-size: 18px; }
+  .grade .gmeta { font-size: 9px; }
+
+  .enrichment { margin-top: 28px; padding-top: 20px; }
+  .enrich-section.side-by-side { grid-template-columns: 1fr; gap: 20px; }
+
+  .shortcuts { padding: 12px 16px; font-size: 9px; flex-direction: column; gap: 8px; align-items: flex-start; }
+  .shortcuts .group { flex-wrap: wrap; gap: 12px; }
+
+  /* Library table → stacked rows on mobile */
+  .page { padding: 24px 16px 40px; }
+  .page-title { font-size: 36px; }
+  .toolbar { flex-direction: column; align-items: stretch; }
+  .filters { overflow-x: auto; }
+  .tbl-head { display: none; }
+  .tbl-row {
+    grid-template-columns: 1fr 70px !important;
+    grid-template-areas:
+      "word due"
+      "meaning meaning"
+      "diff play";
+    padding: 14px 8px;
+    gap: 8px 12px;
+    row-gap: 6px;
+  }
+  .tbl-row > :nth-child(1) { grid-area: word; }
+  .tbl-row > :nth-child(2) { grid-area: meaning; }
+  .tbl-row > :nth-child(3) { grid-area: diff; }
+  .tbl-row > :nth-child(4) { grid-area: due; }
+  .tbl-row > :nth-child(5) { grid-area: play; }
+  .word-cell { font-size: 17px; }
+  .meaning-cell { font-size: 13px; -webkit-line-clamp: 3; }
+
+  /* Stats */
+  .metrics { grid-template-columns: 1fr 1fr; }
+  .metric { padding: 18px 16px; }
+  .metric .value { font-size: 42px; }
+  .section { margin-top: 32px; }
+  .section-title { font-size: 22px; }
+  #retention-chart { height: 260px !important; }
+}
+
+@media (max-width: 480px) {
+  .metrics { grid-template-columns: 1fr; }
+  .metric { border-right: none; border-bottom: 1px solid var(--hairline); }
+  .topbar .nav { gap: 14px; font-size: 9px !important; }
+}

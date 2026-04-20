@@ -1,24 +1,138 @@
-// app.js — shared: data loading, state persistence, simple Leitner-style scheduling
+// app.js — shared: data loading, state persistence, Leitner scheduling, retention
 
+// ---------- Data loading ----------
 let _wordsPromise = null;
 export async function loadWords() {
   if (!_wordsPromise) {
-    _wordsPromise = fetch('words.json').then(r => r.json());
+    _wordsPromise = fetch('words.json?v=' + Date.now())
+      .then(r => {
+        if (!r.ok) throw new Error(`words.json fetch failed: ${r.status}`);
+        return r.json();
+      });
   }
   return _wordsPromise;
 }
 
 // ---------- State (localStorage) ----------
-// Schema: { [wordId]: { box, due, reps, remembered, forgot, history: [{t, ok}] } }
+// Schema: { [wordId]: { box, due, reps, remembered, forgot, lastReview, history: [{t, ok}], state } }
 const STATE_KEY = 'lexicon_state_v2';
+const LEGACY_STATE_KEYS = ['lexicon_state_v1'];
 
-export function loadState() {
-  try { return JSON.parse(localStorage.getItem(STATE_KEY)) || {}; }
-  catch { return {}; }
+/**
+ * Normalize a card state so downstream code can assume complete schema.
+ */
+function normalizeCardState(card) {
+  if (!card || typeof card !== 'object') return null;
+  return {
+    box: Number.isFinite(card.box) ? card.box : 0,
+    due: typeof card.due === 'string' ? card.due : new Date().toISOString(),
+    reps: Number.isFinite(card.reps) ? card.reps : 0,
+    remembered: Number.isFinite(card.remembered) ? card.remembered : 0,
+    forgot: Number.isFinite(card.forgot) ? card.forgot : 0,
+    lastReview: typeof card.lastReview === 'string' ? card.lastReview : null,
+    history: Array.isArray(card.history) ? card.history : [],
+    state: typeof card.state === 'string' ? card.state : 'new',
+  };
 }
 
+/**
+ * Migrate legacy FSRS v1 state → v2 Leitner state.
+ * v1 fields: { stability, difficulty, reps, lapses, lastReview, due, state }
+ * v2 fields: { box, reps, remembered, forgot, lastReview, due, history, state }
+ */
+function migrateV1(v1State) {
+  const migrated = {};
+  for (const id in v1State) {
+    const c = v1State[id];
+    if (!c) continue;
+    // Map stability → box approximately
+    const stability = Number(c.stability) || 0;
+    let box = 0;
+    if (stability >= 128) box = 8;
+    else if (stability >= 64) box = 7;
+    else if (stability >= 32) box = 6;
+    else if (stability >= 16) box = 5;
+    else if (stability >= 8) box = 4;
+    else if (stability >= 4) box = 3;
+    else if (stability >= 2) box = 2;
+    else if (stability >= 1) box = 1;
+    const reps = Number(c.reps) || 0;
+    const lapses = Number(c.lapses) || 0;
+    migrated[id] = {
+      box,
+      due: c.due || new Date().toISOString(),
+      reps,
+      remembered: Math.max(reps - lapses, 0),
+      forgot: lapses,
+      lastReview: c.lastReview || null,
+      history: [],  // can't reconstruct
+      state: c.state || 'learning',
+    };
+  }
+  return migrated;
+}
+
+let _stateCache = null;  // in-memory cache
+
+export function loadState() {
+  if (_stateCache) return _stateCache;
+
+  // Try current version
+  try {
+    const raw = localStorage.getItem(STATE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object') {
+        // Normalize every card
+        const normalized = {};
+        for (const id in parsed) {
+          const n = normalizeCardState(parsed[id]);
+          if (n) normalized[id] = n;
+        }
+        _stateCache = normalized;
+        return _stateCache;
+      }
+    }
+  } catch (e) {
+    console.warn('Failed to parse state, starting fresh:', e);
+  }
+
+  // Try legacy migration
+  for (const legacyKey of LEGACY_STATE_KEYS) {
+    const raw = localStorage.getItem(legacyKey);
+    if (raw) {
+      try {
+        const v1 = JSON.parse(raw);
+        const migrated = migrateV1(v1);
+        localStorage.setItem(STATE_KEY, JSON.stringify(migrated));
+        localStorage.setItem(legacyKey + '_archived', raw); // keep backup
+        localStorage.removeItem(legacyKey);
+        console.info(`Migrated ${Object.keys(migrated).length} cards from ${legacyKey}`);
+        _stateCache = migrated;
+        return _stateCache;
+      } catch (e) {
+        console.warn(`Migration from ${legacyKey} failed:`, e);
+      }
+    }
+  }
+
+  _stateCache = {};
+  return _stateCache;
+}
+
+/**
+ * Atomic state save. Uses in-memory cache to prevent lost updates
+ * when tabs race on loadState → modify → saveState.
+ * Still not perfect cross-tab (no true locking), but eliminates the
+ * intra-tab race.
+ */
 export function saveState(state) {
-  localStorage.setItem(STATE_KEY, JSON.stringify(state));
+  _stateCache = state;
+  try {
+    localStorage.setItem(STATE_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.error('saveState failed:', e);
+  }
 }
 
 export function getCardState(wordId) {
@@ -28,27 +142,30 @@ export function getCardState(wordId) {
 
 export function setCardState(wordId, cardState) {
   const s = loadState();
-  s[wordId] = cardState;
+  s[wordId] = normalizeCardState(cardState);
   saveState(s);
 }
 
-// ---------- Leitner-like scheduling ----------
-// Simple rule based on "remembered?" boolean:
-//   remembered → box+1, interval doubles up to cap
-//   forgot     → box resets to 0, show in same session (or 10 min)
-// Intervals per box (days): [0.007 (10min), 1, 2, 4, 8, 16, 32, 64, 128]
+// Listen for cross-tab updates to invalidate the in-memory cache.
+if (typeof window !== 'undefined') {
+  window.addEventListener('storage', (e) => {
+    if (e.key === STATE_KEY) _stateCache = null;
+  });
+}
+
+// ---------- Leitner scheduling ----------
+// Intervals per box in days: [10min, 1d, 2d, 4d, 8d, 16d, 32d, 64d, 128d]
 const BOX_INTERVALS_DAYS = [10/1440, 1, 2, 4, 8, 16, 32, 64, 128];
+const MATURE_BOX = 6;  // 32+ days
 
 /**
- * Schedule next review.
- * @param {object|null} prev
- * @param {boolean} remembered - true if user remembered, false if forgot
- * @returns {object} new state
+ * @param {object|null} prev previous card state (normalized) or null for new
+ * @param {boolean} remembered
  */
 export function schedule(prev, remembered) {
   const now = new Date();
-  const history = (prev?.history || []).slice(-50); // cap history
-  history.push({ t: now.toISOString(), ok: remembered });
+  const history = (prev?.history || []).slice(-50);
+  history.push({ t: now.toISOString(), ok: !!remembered });
 
   const prevBox = prev?.box ?? 0;
   const box = remembered ? Math.min(prevBox + 1, BOX_INTERVALS_DAYS.length - 1) : 0;
@@ -67,14 +184,15 @@ export function schedule(prev, remembered) {
     forgot,
     lastReview: now.toISOString(),
     history,
-    state: classifyState(box, reps, forgot)
+    state: classifyState(box, reps, forgot),
   };
 }
 
 function classifyState(box, reps, forgot) {
   if (reps === 0) return 'new';
-  if (box >= 6) return 'mature';  // 32+ days = mastered
-  if (forgot >= 3 && reps > 0 && forgot / reps > 0.5) return 'leech';
+  // Leech: 3+ forgets and >50% forget rate
+  if (forgot >= 3 && forgot / Math.max(reps, 1) > 0.5) return 'leech';
+  if (box >= MATURE_BOX) return 'mature';
   return 'learning';
 }
 
@@ -83,7 +201,7 @@ export function previewIntervals(prev) {
   const okBox = Math.min(prevBox + 1, BOX_INTERVALS_DAYS.length - 1);
   return {
     forgot: formatInterval(BOX_INTERVALS_DAYS[0]),
-    remembered: formatInterval(BOX_INTERVALS_DAYS[okBox])
+    remembered: formatInterval(BOX_INTERVALS_DAYS[okBox]),
   };
 }
 
@@ -97,12 +215,17 @@ function formatInterval(days) {
 
 export function isDue(cardState, now = new Date()) {
   if (!cardState) return true;
-  return new Date(cardState.due) <= now;
+  try {
+    return new Date(cardState.due) <= now;
+  } catch {
+    return true;
+  }
 }
 
 export function formatDue(dueIso, now = new Date()) {
   if (!dueIso) return 'NEW';
   const due = new Date(dueIso);
+  if (isNaN(due)) return 'NEW';
   const diff = (due - now) / 1000;
   if (diff <= 0) {
     const past = -diff;
@@ -118,25 +241,35 @@ export function formatDue(dueIso, now = new Date()) {
 }
 
 // ---------- Audio ----------
+/** Whitelist audio filenames to prevent path injection */
+function safeAudioPath(filename) {
+  if (!filename || typeof filename !== 'string') return null;
+  // Only allow alphanumerics, dot, dash, underscore. Must end in .mp3/.wav/.ogg.
+  if (!/^[a-zA-Z0-9._-]+\.(mp3|wav|ogg)$/.test(filename)) return null;
+  return `audio/${filename}`;
+}
+
 export function speakWord(word) {
   if (!('speechSynthesis' in window)) return;
-  const u = new SpeechSynthesisUtterance(word);
-  u.lang = 'en-US';
-  u.rate = 0.9;
-  speechSynthesis.speak(u);
+  try {
+    const u = new SpeechSynthesisUtterance(String(word));
+    u.lang = 'en-US';
+    u.rate = 0.9;
+    speechSynthesis.speak(u);
+  } catch (e) { console.warn(e); }
 }
 
 export function playAudio(word) {
-  if (word.audio_file) {
-    const a = new Audio(`audio/${word.audio_file}`);
+  const src = safeAudioPath(word.audio_file);
+  if (src) {
+    const a = new Audio(src);
     a.play().catch(() => speakWord(word.word));
   } else {
     speakWord(word.word);
   }
 }
 
-// ---------- Daily plan (retention-driven) ----------
-// Locks the day's queue so refreshing mid-session doesn't change it.
+// ---------- Daily plan ----------
 const PLAN_KEY_PREFIX = 'lexicon_plan_';
 
 function todayKey() {
@@ -149,7 +282,10 @@ export function computeRetention14d(state) {
   for (const id in state) {
     const hist = state[id]?.history || [];
     for (const h of hist) {
-      if ((now - new Date(h.t)) / 86400000 < 14) recent.push(h.ok);
+      if (!h || typeof h !== 'object') continue;
+      const t = new Date(h.t);
+      if (isNaN(t)) continue;
+      if ((now - t) / 86400000 < 14) recent.push(!!h.ok);
     }
   }
   if (recent.length < 5) return null;
@@ -157,8 +293,7 @@ export function computeRetention14d(state) {
 }
 
 /**
- * Get or compute today's word plan.
- * Cached per-day in localStorage so it's stable within a day.
+ * Get or compute today's plan. Cache validated against current date.
  */
 export function getTodayPlan(words, state) {
   const key = PLAN_KEY_PREFIX + todayKey();
@@ -166,11 +301,14 @@ export function getTodayPlan(words, state) {
   if (cached) {
     try {
       const p = JSON.parse(cached);
-      // Validate IDs still exist
-      const ids = new Set(words.map(w => w.id));
-      p.due_ids = p.due_ids.filter(i => ids.has(i));
-      p.new_ids = p.new_ids.filter(i => ids.has(i));
-      return p;
+      // Validate date matches (guard against midnight rollover)
+      if (p.date === todayKey()) {
+        const ids = new Set(words.map(w => w.id));
+        p.due_ids = (p.due_ids || []).filter(i => ids.has(i));
+        p.new_ids = (p.new_ids || []).filter(i => ids.has(i));
+        p.completed_ids = p.completed_ids || [];
+        return p;
+      }
     } catch {}
   }
 
@@ -179,8 +317,6 @@ export function getTodayPlan(words, state) {
     const cs = state[w.id];
     return cs && isDue(cs, now);
   });
-  // All unseen words go into today's plan — no throttling.
-  // User-added = user wants to learn. Pace is controlled by user stopping when they want.
   const newWords = words.filter(w => !state[w.id]);
   const retention = computeRetention14d(state);
 
@@ -191,13 +327,19 @@ export function getTodayPlan(words, state) {
     retention_14d: retention,
     completed_ids: [],
   };
-  localStorage.setItem(key, JSON.stringify(plan));
+  try {
+    localStorage.setItem(key, JSON.stringify(plan));
+  } catch (e) {
+    console.warn('Failed to cache plan:', e);
+  }
 
   // Cleanup old plans (keep last 7)
-  const all = Object.keys(localStorage).filter(k => k.startsWith(PLAN_KEY_PREFIX)).sort();
-  if (all.length > 7) {
-    all.slice(0, all.length - 7).forEach(k => localStorage.removeItem(k));
-  }
+  try {
+    const all = Object.keys(localStorage).filter(k => k.startsWith(PLAN_KEY_PREFIX)).sort();
+    if (all.length > 7) {
+      all.slice(0, all.length - 7).forEach(k => localStorage.removeItem(k));
+    }
+  } catch {}
   return plan;
 }
 
@@ -205,22 +347,31 @@ export function markPlanCompleted(wordId) {
   const key = PLAN_KEY_PREFIX + todayKey();
   const cached = localStorage.getItem(key);
   if (!cached) return;
-  const plan = JSON.parse(cached);
-  if (!plan.completed_ids.includes(wordId)) {
-    plan.completed_ids.push(wordId);
-    localStorage.setItem(key, JSON.stringify(plan));
-  }
+  try {
+    const plan = JSON.parse(cached);
+    if (plan.date !== todayKey()) return;  // day changed
+    plan.completed_ids = plan.completed_ids || [];
+    if (!plan.completed_ids.includes(wordId)) {
+      plan.completed_ids.push(wordId);
+      localStorage.setItem(key, JSON.stringify(plan));
+    }
+  } catch (e) { console.warn(e); }
 }
 
-// ---------- Retention curve: compute from actual history ----------
-// Returns array of {day, retention}. Retention = P(remembered) at that time-since-review.
+// ---------- Retention curve ----------
+const RETENTION_BINS = 91;  // 0..90 days inclusive
+
 export function computeRetentionCurve(state) {
-  const bins = Array.from({length: 90}, () => ({ok: 0, total: 0}));
+  const bins = Array.from({length: RETENTION_BINS}, () => ({ok: 0, total: 0}));
   for (const id in state) {
     const hist = state[id]?.history || [];
     for (let i = 1; i < hist.length; i++) {
-      const gap = (new Date(hist[i].t) - new Date(hist[i-1].t)) / 86400000;
-      const bin = Math.min(Math.floor(gap), 89);
+      const prev = new Date(hist[i-1]?.t);
+      const cur = new Date(hist[i]?.t);
+      if (isNaN(prev) || isNaN(cur)) continue;
+      const gap = (cur - prev) / 86400000;
+      if (gap < 0) continue;
+      const bin = Math.min(Math.round(gap), RETENTION_BINS - 1);
       bins[bin].total++;
       if (hist[i].ok) bins[bin].ok++;
     }
@@ -228,6 +379,27 @@ export function computeRetentionCurve(state) {
   return bins.map((b, i) => ({
     day: i,
     retention: b.total ? b.ok / b.total : null,
-    samples: b.total
+    samples: b.total,
   }));
+}
+
+// ---------- Adaptive forgot re-queue spacing ----------
+/**
+ * How many slots ahead to re-queue a "forgot" card.
+ * Tighter for chronic leeches (need more immediate repetition).
+ */
+export function forgotRequeueOffset(prev, queueLen, currentIdx) {
+  const remaining = queueLen - currentIdx;
+  if (remaining <= 0) return 0;
+  // Repeat count so far = prev.forgot. More forgets → shorter gap.
+  const forgotCount = prev?.forgot || 0;
+  const base = forgotCount >= 3 ? 2 : forgotCount >= 1 ? 4 : 6;
+  return Math.min(base, Math.max(1, Math.floor(remaining / 2)));
+}
+
+// ---------- Safe HTML escape ----------
+export function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;',
+  }[c]));
 }

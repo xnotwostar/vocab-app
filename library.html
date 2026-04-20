@@ -115,11 +115,12 @@
         </span>
         <input type="text" id="search-input" placeholder="Search by word, meaning, or example…" />
       </div>
-      <div class="filters" id="filters">
-        <button class="filter active" data-filter="all">All <span class="count" id="count-all">—</span></button>
-        <button class="filter" data-filter="due">Due <span class="count" id="count-due">—</span></button>
-        <button class="filter" data-filter="learning">Learning <span class="count" id="count-learning">—</span></button>
-        <button class="filter" data-filter="mature">Mature <span class="count" id="count-mature">—</span></button>
+      <div class="filters" id="filters" role="group" aria-label="Filter words">
+        <button class="filter active" data-filter="all" aria-pressed="true">All <span class="count" id="count-all">—</span></button>
+        <button class="filter" data-filter="due" aria-pressed="false">Due <span class="count" id="count-due">—</span></button>
+        <button class="filter" data-filter="learning" aria-pressed="false">Learning <span class="count" id="count-learning">—</span></button>
+        <button class="filter" data-filter="mature" aria-pressed="false">Mature <span class="count" id="count-mature">—</span></button>
+        <button class="filter" data-filter="leech" aria-pressed="false">Leech <span class="count" id="count-leech">—</span></button>
       </div>
     </div>
 

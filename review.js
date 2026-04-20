@@ -1,5 +1,9 @@
 // review.js — flashcard with auto-play audio + binary remember/forgot + integrated plan header
-import { loadWords, loadState, setCardState, schedule, isDue, previewIntervals, playAudio, formatDue, getTodayPlan, markPlanCompleted, computeRetention14d } from './app.js';
+import {
+  loadWords, loadState, setCardState, schedule, previewIntervals,
+  playAudio, getTodayPlan, markPlanCompleted, computeRetention14d,
+  forgotRequeueOffset, escapeHtml
+} from './app.js';
 
 const WEEKDAYS_ZH = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
 
@@ -14,14 +18,12 @@ const fsrsMetaEl = document.getElementById('fsrs-meta');
 
 async function init() {
   const data = await loadWords();
-  words = data.words;
+  words = data.words || [];
   const state = loadState();
 
-  // Use today's plan (cached per day)
   plan = getTodayPlan(words, state);
   const byId = Object.fromEntries(words.map(w => [w.id, w]));
 
-  // Filter out already completed in today's plan
   const completed = new Set(plan.completed_ids);
   const planIds = [...plan.due_ids, ...plan.new_ids].filter(id => !completed.has(id));
   queue = planIds.map(id => byId[id]).filter(Boolean);
@@ -30,9 +32,12 @@ async function init() {
   queue.sort((a, b) => {
     const aIsNew = !state[a.id];
     const bIsNew = !state[b.id];
-    if (aIsNew && !bIsNew) return 1;  // new last
+    if (aIsNew && !bIsNew) return 1;
     if (!aIsNew && bIsNew) return -1;
-    if (!aIsNew && !bIsNew) return new Date(state[a.id].due) - new Date(state[b.id].due);
+    if (!aIsNew && !bIsNew) {
+      try { return new Date(state[a.id].due) - new Date(state[b.id].due); }
+      catch { return 0; }
+    }
     return 0;
   });
 
@@ -45,7 +50,8 @@ async function init() {
 function renderPlanHeader(state) {
   const now = new Date();
   document.getElementById('plan-weekday').textContent = WEEKDAYS_ZH[now.getDay()];
-  document.getElementById('plan-date').textContent = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')}`;
+  document.getElementById('plan-date').textContent =
+    `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')}`;
 
   const total = plan.due_ids.length + plan.new_ids.length;
   const done = plan.completed_ids.filter(id =>
@@ -59,14 +65,15 @@ function renderPlanHeader(state) {
   document.getElementById('plan-remaining').textContent = remaining === 0 ? 'done' : `${remaining} left`;
   document.getElementById('plan-progress-fill').style.width = `${pct}%`;
 
-  // Week stats
   document.getElementById('stat-streak').textContent = computeStreak(state);
 
   let reviewsCount = 0;
   for (const id in state) {
     const hist = state[id]?.history || [];
     for (const h of hist) {
-      if ((now - new Date(h.t)) / 86400000 < 7) reviewsCount++;
+      if (!h?.t) continue;
+      const t = new Date(h.t);
+      if (!isNaN(t) && (now - t) / 86400000 < 7) reviewsCount++;
     }
   }
   document.getElementById('stat-reviews').textContent = reviewsCount;
@@ -82,7 +89,8 @@ function renderPlanHeader(state) {
 function computeStreak(state) {
   const days = new Set();
   for (const id in state) {
-    if (state[id]?.lastReview) days.add(state[id].lastReview.slice(0, 10));
+    const lr = state[id]?.lastReview;
+    if (typeof lr === 'string' && lr.length >= 10) days.add(lr.slice(0, 10));
   }
   if (days.size === 0) return 0;
   let streak = 0;
@@ -121,6 +129,9 @@ function renderCard() {
 
   revealed = false;
 
+  const isLeech = prev?.state === 'leech';
+  const leechBadge = isLeech ? `<span class="leech-badge" title="Commonly forgotten">LEECH</span>` : '';
+
   stage.innerHTML = `
     <div class="card-frame">
       <div class="card-chrome">
@@ -128,10 +139,11 @@ function renderCard() {
           <span class="swatch"></span>
           <span class="code">EN</span>
           <span class="sep">—</span>
-          <span>${w.source || 'English'}</span>
+          <span>${escapeHtml(w.source || 'English')}</span>
+          ${leechBadge}
         </div>
-        <button class="speaker" id="btn-speak" aria-label="Pronounce" title="Replay (S)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <button class="speaker" id="btn-speak" aria-label="Pronounce ${escapeHtml(w.word)}" title="Replay (S)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M4 10v4h3l5 4V6L7 10H4z"/>
             <path d="M16 8.5c1.2 1 1.2 6 0 7" opacity="0.7"/>
             <path d="M19 6c2.2 1.8 2.2 10.2 0 12" opacity="0.45"/>
@@ -140,26 +152,25 @@ function renderCard() {
       </div>
 
       <div class="word-wrap">
-        <h1 class="word">${w.word}</h1>
-        ${w.phonetic ? `<div class="phonetic">${w.phonetic}</div>` : ''}
+        <h1 class="word">${escapeHtml(w.word)}</h1>
+        ${w.phonetic ? `<div class="phonetic">${escapeHtml(w.phonetic)}</div>` : ''}
         ${w.difficulty ? `<div class="pos"><span class="tick"></span><span>${'⭐'.repeat(w.difficulty)}</span><span class="tick"></span></div>` : ''}
       </div>
 
-      <section class="revealed" id="revealed" style="display:none">
+      <section class="revealed" id="revealed" style="display:none" aria-hidden="true">
         <div class="divider"></div>
-        <p class="meaning">${w.meaning_zh || ''}</p>
-        ${w.example ? `<p class="example">"${w.example}"</p>` : ''}
-
+        <p class="meaning">${escapeHtml(w.meaning_zh || '')}</p>
+        ${w.example ? `<p class="example">"${escapeHtml(w.example)}"</p>` : ''}
         ${renderEnrichment(w)}
       </section>
 
-      <div class="grades binary" role="group" style="display:none" id="grades">
-        <button class="grade again" data-key="1">
+      <div class="grades binary" role="group" aria-label="Grade this card" style="display:none" id="grades">
+        <button class="grade again" data-key="1" aria-label="Forgot · 不记得 · ${intervals.forgot}">
           <span class="gkey">1</span>
           <span class="glabel">不记得</span>
           <span class="gmeta">${intervals.forgot}</span>
         </button>
-        <button class="grade good primary" data-key="2">
+        <button class="grade good primary" data-key="2" aria-label="Remembered · 记得 · ${intervals.remembered}">
           <span class="gkey">2</span>
           <span class="glabel">记得</span>
           <span class="gmeta">${intervals.remembered}</span>
@@ -237,15 +248,13 @@ function renderEnrichment(w) {
   return parts.length ? `<div class="enrichment">${parts.join('')}</div>` : '';
 }
 
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
 function reveal() {
   if (revealed) return;
   revealed = true;
-  document.getElementById('revealed').style.display = '';
-  document.getElementById('grades').style.display = '';
+  const r = document.getElementById('revealed');
+  const g = document.getElementById('grades');
+  if (r) { r.style.display = ''; r.setAttribute('aria-hidden', 'false'); }
+  if (g) g.style.display = '';
 }
 
 function grade(remembered) {
@@ -255,34 +264,41 @@ function grade(remembered) {
   const prev = state[w.id];
   setCardState(w.id, schedule(prev, remembered));
 
-  // Mark as completed in today's plan (so progress bar updates)
   if (remembered) {
     markPlanCompleted(w.id);
-    // Keep in-memory plan in sync with localStorage
     if (!plan.completed_ids.includes(w.id)) plan.completed_ids.push(w.id);
   } else {
-    // Forgot: re-queue 5 slots later, don't mark as completed yet
-    const reinsertAt = Math.min(currentIdx + 5, queue.length);
+    // Adaptive re-queue: leech → sooner; new forget → further out
+    const offset = forgotRequeueOffset(prev, queue.length, currentIdx);
+    const reinsertAt = Math.min(currentIdx + offset, queue.length);
     queue.splice(reinsertAt, 0, w);
   }
 
   currentIdx++;
-  renderPlanHeader(loadState()); // live-update header
+  renderPlanHeader(loadState());
   setTimeout(renderCard, 120);
 }
 
-
 document.addEventListener('keydown', (e) => {
-  if (e.target.tagName === 'INPUT') return;
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
   if (e.key === ' ') { e.preventDefault(); reveal(); }
-  if (e.key === '1') grade(false);
-  if (e.key === '2') grade(true);
-  if (e.key.toLowerCase() === 's') {
+  else if (e.key === '1') grade(false);
+  else if (e.key === '2') grade(true);
+  else if (e.key.toLowerCase() === 's') {
     const w = queue[currentIdx];
     if (w) playAudio(w);
   }
 });
 
 init().catch(err => {
-  stage.innerHTML = `<div class="empty"><h2>Error loading words</h2><p>${err.message}</p></div>`;
+  console.error('init failed:', err);
+  const title = document.createElement('h2');
+  title.textContent = 'Error loading words';
+  const msg = document.createElement('p');
+  msg.textContent = err.message || 'Unknown error';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'empty';
+  wrapper.append(title, msg);
+  stage.innerHTML = '';
+  stage.appendChild(wrapper);
 });

@@ -1,5 +1,5 @@
 // library.js — word list with search + filter
-import { loadWords, loadState, isDue, formatDue, playAudio } from './app.js';
+import { loadWords, loadState, isDue, formatDue, playAudio, escapeHtml } from './app.js';
 
 let words = [];
 let state = {};
@@ -8,7 +8,7 @@ let currentSearch = '';
 
 async function init() {
   const data = await loadWords();
-  words = data.words;
+  words = data.words || [];
   state = loadState();
 
   document.getElementById('total-count').textContent = words.length;
@@ -18,15 +18,24 @@ async function init() {
   renderCounts();
   render();
 
-  document.getElementById('search-input').addEventListener('input', (e) => {
-    currentSearch = e.target.value.toLowerCase();
-    render();
-  });
+  const search = document.getElementById('search-input');
+  if (search) {
+    search.setAttribute('aria-label', 'Search words');
+    search.addEventListener('input', (e) => {
+      currentSearch = e.target.value.toLowerCase();
+      render();
+    });
+  }
 
   document.querySelectorAll('.filter').forEach(b => {
+    b.setAttribute('aria-pressed', b.classList.contains('active') ? 'true' : 'false');
     b.addEventListener('click', () => {
-      document.querySelectorAll('.filter').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.filter').forEach(x => {
+        x.classList.remove('active');
+        x.setAttribute('aria-pressed', 'false');
+      });
       b.classList.add('active');
+      b.setAttribute('aria-pressed', 'true');
       currentFilter = b.dataset.filter;
       render();
     });
@@ -35,30 +44,32 @@ async function init() {
 
 function renderCounts() {
   const now = new Date();
-  const counts = { all: 0, due: 0, learning: 0, mature: 0 };
+  const counts = { all: 0, due: 0, learning: 0, mature: 0, leech: 0 };
   for (const w of words) {
     const cs = state[w.id];
     counts.all++;
     if (isDue(cs, now)) counts.due++;
     if (!cs || cs.state === 'learning' || cs.state === 'new') counts.learning++;
-    if (cs && cs.state === 'mature') counts.mature++;
+    if (cs?.state === 'mature') counts.mature++;
+    if (cs?.state === 'leech') counts.leech++;
   }
-  document.getElementById('count-all').textContent = counts.all;
-  document.getElementById('count-due').textContent = counts.due;
-  document.getElementById('count-learning').textContent = counts.learning;
-  document.getElementById('count-mature').textContent = counts.mature;
-  document.getElementById('due-count').textContent = counts.due;
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('count-all', counts.all);
+  set('count-due', counts.due);
+  set('count-learning', counts.learning);
+  set('count-mature', counts.mature);
+  set('count-leech', counts.leech);
+  set('due-count', counts.due);
 }
 
 function filterWord(w) {
-  // Filter
   const cs = state[w.id];
   const now = new Date();
   if (currentFilter === 'due' && !isDue(cs, now)) return false;
   if (currentFilter === 'learning' && !(!cs || cs.state === 'learning' || cs.state === 'new')) return false;
-  if (currentFilter === 'mature' && !(cs && cs.state === 'mature')) return false;
+  if (currentFilter === 'mature' && !(cs?.state === 'mature')) return false;
+  if (currentFilter === 'leech' && !(cs?.state === 'leech')) return false;
 
-  // Search
   if (currentSearch) {
     const hay = `${w.word} ${w.meaning_zh || ''} ${w.example || ''}`.toLowerCase();
     if (!hay.includes(currentSearch)) return false;
@@ -88,16 +99,17 @@ function renderRow(w) {
   const dueText = cs ? formatDue(cs.due, now) : 'NEW';
   const dueClass = cs && isDue(cs, now) ? 'due-now' : '';
   const diffStars = w.difficulty ? '⭐'.repeat(w.difficulty) : '—';
+  const leechBadge = cs?.state === 'leech' ? ' <span class="leech-badge-sm">LEECH</span>' : '';
 
   return `
     <div class="tbl-row">
-      <div class="word-cell">${w.word}${w.phonetic ? `<span class="phonetic">${w.phonetic}</span>` : ''}</div>
-      <div class="meaning-cell">${w.meaning_zh || ''}${w.example ? ` · <em style="color:var(--ink-faint)">${w.example}</em>` : ''}</div>
+      <div class="word-cell">${escapeHtml(w.word)}${w.phonetic ? `<span class="phonetic">${escapeHtml(w.phonetic)}</span>` : ''}${leechBadge}</div>
+      <div class="meaning-cell">${escapeHtml(w.meaning_zh || '')}${w.example ? ` · <em style="color:var(--ink-faint)">${escapeHtml(w.example)}</em>` : ''}</div>
       <div class="diff-cell">${diffStars}</div>
       <div class="due-cell ${dueClass}">${dueText}</div>
       <div class="play-cell">
-        <button data-play="${w.id}" title="Pronounce">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <button data-play="${escapeHtml(w.id)}" aria-label="Pronounce ${escapeHtml(w.word)}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M4 10v4h3l5 4V6L7 10H4z"/>
             <path d="M16 8.5c1.2 1 1.2 6 0 7" opacity="0.7"/>
           </svg>
@@ -107,5 +119,7 @@ function renderRow(w) {
 }
 
 init().catch(err => {
-  document.getElementById('tbl-foot').textContent = `Error: ${err.message}`;
+  console.error(err);
+  const foot = document.getElementById('tbl-foot');
+  if (foot) foot.textContent = `Error: ${err.message || 'unknown'}`;
 });
