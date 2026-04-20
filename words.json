@@ -1,9 +1,175 @@
 {
   "version": 1,
-  "generated_at": "2026-04-20T00:31:51",
+  "generated_at": "2026-04-20T03:41:33",
   "source_file": "English/vocabulary-book.md",
-  "count": 49,
+  "count": 54,
   "words": [
+    {
+      "id": "proactively",
+      "word": "proactively",
+      "phonetic": "/prəʊˈæktɪvli/",
+      "meaning_zh": "主动地；提前行动地",
+      "example": "act proactively instead of reactively",
+      "difficulty": 2,
+      "source": "混合来源",
+      "category": null,
+      "audio_file": "proactively.mp3",
+      "added": "2026-04-20",
+      "synonyms": [
+        "in advance",
+        "preemptively",
+        "ahead of time"
+      ],
+      "antonyms": [
+        "reactively",
+        "passively"
+      ],
+      "etymology": "pro-（向前）+ active（主动）+ -ly → 主动向前地",
+      "examples": [
+        "Good engineers fix problems proactively before they escalate.",
+        "She proactively reached out before being asked.",
+        "The team monitors systems proactively to prevent outages."
+      ],
+      "collocations": [
+        "act proactively",
+        "proactively reach out",
+        "proactively identify"
+      ],
+      "memory_hook": "pro（主动）+ active（行动）→ 主动去做",
+      "enriched": true
+    },
+    {
+      "id": "counterarguments",
+      "word": "counterarguments",
+      "phonetic": "/ˈkaʊntərˌɑːrɡjuməntz/",
+      "meaning_zh": "反驳论点；反对论据",
+      "example": "offer counterarguments to test the thesis",
+      "difficulty": 3,
+      "source": "混合来源",
+      "category": null,
+      "audio_file": "counterarguments.mp3",
+      "added": "2026-04-20",
+      "synonyms": [
+        "rebuttals",
+        "objections",
+        "contradictions"
+      ],
+      "antonyms": [
+        "agreement",
+        "endorsement"
+      ],
+      "etymology": "counter-（对抗）+ argument（论证）",
+      "examples": [
+        "A good thesis anticipates and addresses counterarguments.",
+        "Philosophers test ideas by imagining the strongest counterarguments.",
+        "She gave three counterarguments to his proposal."
+      ],
+      "collocations": [
+        "offer counterarguments",
+        "anticipate counterarguments",
+        "strong counterargument"
+      ],
+      "memory_hook": "counter（反）+ argument（论据）= 对立的论点",
+      "enriched": true
+    },
+    {
+      "id": "anthropomorphic",
+      "word": "anthropomorphic",
+      "phonetic": "/ˌænθrəpəˈmɔːrfɪk/",
+      "meaning_zh": "拟人化的；赋予人性特征的",
+      "example": "avoid anthropomorphic language about LLMs",
+      "difficulty": 3,
+      "source": "混合来源",
+      "category": null,
+      "audio_file": "anthropomorphic.mp3",
+      "added": "2026-04-20",
+      "synonyms": [
+        "humanlike",
+        "personified"
+      ],
+      "antonyms": [
+        "mechanistic",
+        "abstract"
+      ],
+      "etymology": "希腊语 anthrōpos（人）+ morphē（形态）→ 具人形的",
+      "examples": [
+        "Avoid anthropomorphic language when describing LLM behavior.",
+        "The cartoon characters are highly anthropomorphic.",
+        "Shanahan warns against anthropomorphic framings of AI."
+      ],
+      "collocations": [
+        "anthropomorphic language",
+        "anthropomorphic framing",
+        "anthropomorphic bias"
+      ],
+      "memory_hook": "anthropo（人）+ morphic（形状）= 长得像人 = 拟人化",
+      "enriched": true
+    },
+    {
+      "id": "navigate",
+      "word": "navigate",
+      "phonetic": "/ˈnævɪɡeɪt/",
+      "meaning_zh": "导航；在…中穿行；处理（复杂情境）",
+      "example": "navigate ambiguous moral situations",
+      "difficulty": 2,
+      "source": "混合来源",
+      "category": null,
+      "audio_file": "navigate.mp3",
+      "added": "2026-04-20",
+      "synonyms": [
+        "traverse",
+        "maneuver",
+        "steer"
+      ],
+      "antonyms": [
+        "get lost",
+        "stumble"
+      ],
+      "etymology": "拉丁语 navigare（航行）→ navi（船）+ agere（驱动）",
+      "examples": [
+        "Founders need to navigate ambiguous moral situations.",
+        "The app helps you navigate foreign cities.",
+        "Learning to navigate office politics is a career skill."
+      ],
+      "collocations": [
+        "navigate a situation",
+        "navigate uncertainty",
+        "navigate complexity"
+      ],
+      "memory_hook": "navi（船）+ gate（驾驭）= 驾船穿行 → 穿越 / 处理",
+      "enriched": true
+    },
+    {
+      "id": "notation",
+      "word": "notation",
+      "phonetic": "/nəʊˈteɪʃn/",
+      "meaning_zh": "符号系统；记号法",
+      "example": "mathematical notation / scientific notation",
+      "difficulty": 2,
+      "source": "混合来源",
+      "category": null,
+      "audio_file": "notation.mp3",
+      "added": "2026-04-20",
+      "synonyms": [
+        "symbols",
+        "system",
+        "representation"
+      ],
+      "antonyms": [],
+      "etymology": "拉丁语 notare（标记）→ 标记系统",
+      "examples": [
+        "Mathematical notation makes abstract ideas precise.",
+        "The paper uses Einstein notation for tensors.",
+        "Scientific notation expresses very large or small numbers compactly."
+      ],
+      "collocations": [
+        "mathematical notation",
+        "scientific notation",
+        "Einstein notation"
+      ],
+      "memory_hook": "note（记）+ -ation → 记号的系统",
+      "enriched": true
+    },
     {
       "id": "misaligned",
       "word": "misaligned",
@@ -1584,5 +1750,5 @@
       "enriched": true
     }
   ],
-  "enriched_at": "2026-04-20T00:30:00"
+  "enriched_at": "2026-04-20T10:00:00"
 }
