@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lexicon — Stats</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .page { padding: 52px 56px 80px; max-width: 1360px; width: 100%; margin: 0 auto; }
+  .page-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 44px; }
+  .page-title { font-family: var(--serif); font-weight: 700; font-size: 52px; line-height: 1; letter-spacing: -0.02em; margin: 0 0 14px; }
+  .page-sub {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--ink-dim); display: flex; gap: 18px;
+  }
+  .page-sub .sep { color: var(--ink-ghost); }
+  .page-sub .n { color: var(--ink); }
+
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+  .metric { padding: 30px 32px; border-right: 1px solid var(--hairline); display: flex; flex-direction: column; gap: 14px; }
+  .metric:last-child { border-right: none; }
+  .metric .label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink-faint); }
+  .metric .value { font-family: var(--serif); font-weight: 700; font-size: 64px; line-height: 1; letter-spacing: -0.025em; color: var(--ink); }
+  .metric .value .unit { font-size: 20px; color: var(--ink-faint); margin-left: 4px; }
+  .metric .delta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--ink-dim); }
+  .metric.accent .value { color: var(--amber); }
+
+  .section { margin-top: 56px; }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px; border-bottom: 1px solid var(--hairline); padding-bottom: 14px; }
+  .section-title { font-family: var(--serif); font-weight: 700; font-size: 28px; letter-spacing: -0.015em; margin: 0; }
+
+  /* Difficulty distribution */
+  .diff-rows { display: flex; flex-direction: column; gap: 2px; }
+  .diff-row { display: grid; grid-template-columns: 140px 1fr 80px 60px; column-gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--hairline); align-items: center; }
+  .diff-row:last-child { border-bottom: none; }
+  .diff-name { font-family: var(--serif); font-weight: 700; font-size: 18px; display: inline-flex; align-items: baseline; gap: 12px; }
+  .diff-name .code { font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; color: var(--ink-faint); }
+  .diff-bar { height: 4px; background: var(--hairline); position: relative; overflow: hidden; }
+  .diff-bar > span { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ink-faint); }
+  .diff-row.primary .diff-bar > span { background: var(--amber); }
+  .diff-count { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; color: var(--ink); text-align: right; }
+  .diff-pct { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--ink-dim); text-align: right; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><a href="index.html"><span>Lexicon</span><span class="dot">.</span></a></div>
+    <nav class="nav">
+      <a href="index.html">Review</a>
+      <a href="library.html">Library</a>
+      <a href="stats.html" class="active">Stats</a>
+      <a href="typing.html">Typing</a>
+    </nav>
+    <div class="session-meta">
+      <span>Due today <span class="num" id="due-count">—</span></span>
+      <span>Streak <span class="num" id="streak">—</span></span>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="page-head">
+      <div>
+        <h1 class="page-title">Stats</h1>
+        <div class="page-sub">
+          <span>Period <span class="n">All time</span></span>
+          <span class="sep">·</span>
+          <span>Reviews <span class="n" id="total-reviews">—</span></span>
+        </div>
+      </div>
+    </div>
+
+    <section class="metrics">
+      <div class="metric">
+        <div class="label">Total words</div>
+        <div class="value" id="m-total">—</div>
+        <div class="delta" id="m-total-delta">—</div>
+      </div>
+      <div class="metric accent">
+        <div class="label">Due now</div>
+        <div class="value" id="m-due">—</div>
+        <div class="delta" id="m-due-delta">—</div>
+      </div>
+      <div class="metric">
+        <div class="label">Mastered</div>
+        <div class="value"><span id="m-mastered">—</span><span class="unit" id="m-mastered-total"></span></div>
+        <div class="delta" id="m-mastered-delta">—</div>
+      </div>
+      <div class="metric">
+        <div class="label">Accuracy</div>
+        <div class="value"><span id="m-accuracy">—</span><span class="unit">%</span></div>
+        <div class="delta" id="m-accuracy-delta">—</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-title">By difficulty</h2>
+      </div>
+      <div class="diff-rows" id="diff-rows"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-title">By source</h2>
+      </div>
+      <div class="diff-rows" id="source-rows"></div>
+    </section>
+  </main>
+</div>
+
+<script type="module" src="app.js"></script>
+<script type="module" src="stats.js"></script>
+</body>
+</html>
