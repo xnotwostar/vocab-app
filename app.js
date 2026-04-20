@@ -135,6 +135,91 @@ export function playAudio(word) {
   }
 }
 
+// ---------- Daily plan (retention-driven) ----------
+// Locks the day's queue so refreshing mid-session doesn't change it.
+const PLAN_KEY_PREFIX = 'lexicon_plan_';
+
+function todayKey() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+export function computeRetention14d(state) {
+  const now = new Date();
+  const recent = [];
+  for (const id in state) {
+    const hist = state[id]?.history || [];
+    for (const h of hist) {
+      if ((now - new Date(h.t)) / 86400000 < 14) recent.push(h.ok);
+    }
+  }
+  if (recent.length < 5) return null;
+  return recent.filter(x => x).length / recent.length;
+}
+
+/**
+ * Get or compute today's word plan.
+ * Cached per-day in localStorage so it's stable within a day.
+ */
+export function getTodayPlan(words, state) {
+  const key = PLAN_KEY_PREFIX + todayKey();
+  const cached = localStorage.getItem(key);
+  if (cached) {
+    try {
+      const p = JSON.parse(cached);
+      // Validate IDs still exist
+      const ids = new Set(words.map(w => w.id));
+      p.due_ids = p.due_ids.filter(i => ids.has(i));
+      p.new_ids = p.new_ids.filter(i => ids.has(i));
+      return p;
+    } catch {}
+  }
+
+  const now = new Date();
+  const reviewDue = words.filter(w => {
+    const cs = state[w.id];
+    return cs && isDue(cs, now);
+  });
+  const newCandidates = words.filter(w => !state[w.id]);
+
+  const retention = computeRetention14d(state);
+  let newLimit;
+  if (retention === null) newLimit = 10;
+  else if (retention >= 0.85) newLimit = 8;
+  else if (retention >= 0.75) newLimit = 5;
+  else if (retention >= 0.60) newLimit = 3;
+  else newLimit = 0;
+
+  const todayNew = newCandidates.slice(0, newLimit);
+
+  const plan = {
+    date: todayKey(),
+    due_ids: reviewDue.map(w => w.id),
+    new_ids: todayNew.map(w => w.id),
+    retention_14d: retention,
+    new_limit: newLimit,
+    completed_ids: [],
+  };
+  localStorage.setItem(key, JSON.stringify(plan));
+
+  // Cleanup old plans (keep last 7)
+  const all = Object.keys(localStorage).filter(k => k.startsWith(PLAN_KEY_PREFIX)).sort();
+  if (all.length > 7) {
+    all.slice(0, all.length - 7).forEach(k => localStorage.removeItem(k));
+  }
+  return plan;
+}
+
+export function markPlanCompleted(wordId) {
+  const key = PLAN_KEY_PREFIX + todayKey();
+  const cached = localStorage.getItem(key);
+  if (!cached) return;
+  const plan = JSON.parse(cached);
+  if (!plan.completed_ids.includes(wordId)) {
+    plan.completed_ids.push(wordId);
+    localStorage.setItem(key, JSON.stringify(plan));
+  }
+}
+
 // ---------- Retention curve: compute from actual history ----------
 // Returns array of {day, retention}. Retention = P(remembered) at that time-since-review.
 export function computeRetentionCurve(state) {

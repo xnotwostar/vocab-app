@@ -2,28 +2,207 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Lexicon — Review</title>
+<title>Lexicon — Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-  /* Page-specific */
-  .etymology {
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
-    color: var(--ink-faint); margin-top: 14px;
+  .home-stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 40px 80px;
+    max-width: 880px;
+    margin: 0 auto;
+    width: 100%;
   }
-  .etymology .arrow { color: var(--ink-ghost); margin: 0 10px; }
 
-  .synonyms {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
-    margin-top: 20px;
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+  .date-strip {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 8px;
   }
-  .synonyms .chip {
-    padding: 4px 10px; border: 1px solid var(--hairline-strong); border-radius: 2px;
+  .date-big {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 48px;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0 0 8px;
+  }
+  .date-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
     color: var(--ink-dim);
+    margin-bottom: 60px;
+  }
+  .date-sub .num { color: var(--ink); }
+
+  /* Plan card */
+  .plan {
+    width: 100%;
+    max-width: 620px;
+    border: 1px solid var(--hairline-strong);
+    padding: 40px 44px;
+    background: var(--bg-raised);
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .plan::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: var(--amber);
+  }
+  .plan-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 14px;
+  }
+  .plan-big {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 96px;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--amber);
+    margin: 0 0 6px;
+  }
+  .plan-big .unit {
+    font-size: 16px;
+    color: var(--ink-dim);
+    margin-left: 14px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-family: var(--mono);
+  }
+  .plan-breakdown {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--ink-dim);
+    margin: 14px 0 24px;
+    line-height: 1.6;
+  }
+  .plan-breakdown .em {
+    color: var(--amber);
+    font-weight: 700;
+  }
+
+  .progress {
+    height: 6px;
+    background: var(--hairline);
+    margin: 20px 0 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--amber);
+    transition: width 400ms ease;
+  }
+  .progress-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--ink-dim);
+    display: flex;
+    justify-content: space-between;
+  }
+  .progress-label .num { color: var(--ink); }
+
+  .start-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 32px;
+    padding: 16px 28px;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 17px;
+    background: var(--amber);
+    color: #1A0F04;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 160ms;
+  }
+  .start-btn:hover { background: #F2B066; }
+  .start-btn .arrow { display: inline-block; transition: transform 160ms; }
+  .start-btn:hover .arrow { transform: translateX(4px); }
+  .start-btn.done {
+    background: transparent;
+    color: var(--ink-dim);
+    border: 1px solid var(--hairline-strong);
+  }
+
+  /* This week stats */
+  .week-stats {
+    width: 100%;
+    max-width: 620px;
+    border-top: 1px solid var(--hairline);
+    padding-top: 32px;
+  }
+  .week-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 18px;
+  }
+  .week-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .week-cell { display: flex; flex-direction: column; gap: 6px; }
+  .week-cell .k {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .week-cell .v {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .week-cell .v .sub {
+    font-size: 13px;
+    color: var(--ink-faint);
+    margin-left: 4px;
+    font-weight: 500;
+  }
+
+  .empty-day {
+    text-align: center;
+    padding: 60px 0;
+  }
+  .empty-day .big {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 56px;
+    letter-spacing: -0.025em;
+    margin: 0 0 16px;
+  }
+  .empty-day p {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--ink-dim);
+    line-height: 1.6;
   }
 </style>
 </head>
@@ -33,35 +212,50 @@
   <header class="topbar">
     <div class="brand"><a href="index.html"><span>Lexicon</span><span class="dot">.</span></a></div>
     <nav class="nav">
-      <a href="index.html" class="active">Review</a>
+      <a href="index.html" class="active">Home</a>
+      <a href="review.html">Review</a>
       <a href="library.html">Library</a>
       <a href="stats.html">Stats</a>
       <a href="typing.html">Typing</a>
     </nav>
     <div class="session-meta">
-      <span>Session <span class="num" id="session-progress">0 / 0</span></span>
-      <span>Due today <span class="num" id="due-count">0</span></span>
+      <span>Streak <span class="num" id="streak">—</span></span>
     </div>
   </header>
 
-  <main class="stage" id="stage">
-    <!-- Populated by app.js -->
-  </main>
+  <main class="home-stage">
+    <div class="date-strip" id="date-strip">—</div>
+    <h1 class="date-big" id="date-big">—</h1>
+    <div class="date-sub" id="date-sub">—</div>
 
-  <footer class="shortcuts">
-    <div class="group">
-      <span><span class="kbd">Space</span>Reveal</span>
-      <span><span class="kbd">1</span>不记得 <span class="kbd">2</span>记得</span>
-      <span><span class="kbd">S</span>Speak</span>
+    <div id="plan-container"></div>
+
+    <div class="week-stats">
+      <div class="week-title">This week</div>
+      <div class="week-row">
+        <div class="week-cell">
+          <div class="k">Streak</div>
+          <div class="v"><span id="stat-streak">—</span><span class="sub">d</span></div>
+        </div>
+        <div class="week-cell">
+          <div class="k">Reviews</div>
+          <div class="v" id="stat-reviews">—</div>
+        </div>
+        <div class="week-cell">
+          <div class="k">Retention</div>
+          <div class="v"><span id="stat-retention">—</span><span class="sub">%</span></div>
+        </div>
+        <div class="week-cell">
+          <div class="k">Mastered</div>
+          <div class="v"><span id="stat-mastered">—</span><span class="sub">/<span id="stat-total">—</span></span></div>
+        </div>
+      </div>
     </div>
-    <div class="group">
-      <span id="fsrs-meta">FSRS · ready</span>
-    </div>
-  </footer>
+  </main>
 
 </div>
 
 <script type="module" src="app.js"></script>
-<script type="module" src="review.js"></script>
+<script type="module" src="home.js"></script>
 </body>
 </html>

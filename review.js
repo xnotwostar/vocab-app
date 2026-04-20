@@ -1,5 +1,5 @@
 // review.js — flashcard with auto-play audio + binary remember/forgot
-import { loadWords, loadState, setCardState, schedule, isDue, previewIntervals, playAudio, formatDue } from './app.js';
+import { loadWords, loadState, setCardState, schedule, isDue, previewIntervals, playAudio, formatDue, getTodayPlan, markPlanCompleted } from './app.js';
 
 let words = [];
 let queue = [];
@@ -15,20 +15,27 @@ async function init() {
   const data = await loadWords();
   words = data.words;
   const state = loadState();
-  const now = new Date();
 
-  queue = words.filter(w => isDue(state[w.id], now));
+  // Use today's plan (cached per day)
+  const plan = getTodayPlan(words, state);
+  const byId = Object.fromEntries(words.map(w => [w.id, w]));
 
-  // Interleave: new first, then due (overdue first)
+  // Filter out already completed in today's plan
+  const completed = new Set(plan.completed_ids);
+  const planIds = [...plan.due_ids, ...plan.new_ids].filter(id => !completed.has(id));
+  queue = planIds.map(id => byId[id]).filter(Boolean);
+
+  // Sort: due first (by urgency), then new
   queue.sort((a, b) => {
-    const sa = state[a.id], sb = state[b.id];
-    if (!sa && sb) return -1;
-    if (sa && !sb) return 1;
-    if (sa && sb) return new Date(sa.due) - new Date(sb.due);
+    const aIsNew = !state[a.id];
+    const bIsNew = !state[b.id];
+    if (aIsNew && !bIsNew) return 1;  // new last
+    if (!aIsNew && bIsNew) return -1;
+    if (!aIsNew && !bIsNew) return new Date(state[a.id].due) - new Date(state[b.id].due);
     return 0;
   });
 
-  dueCountEl.textContent = queue.length;
+  dueCountEl.textContent = plan.due_ids.length + plan.new_ids.length;
   if (queue.length === 0) return renderEmpty();
   renderCard();
 }
@@ -185,8 +192,11 @@ function grade(remembered) {
   const prev = state[w.id];
   setCardState(w.id, schedule(prev, remembered));
 
-  // If forgot, re-queue this card near the end of session
-  if (!remembered) {
+  // Mark as completed in today's plan (so home page progress updates)
+  if (remembered) {
+    markPlanCompleted(w.id);
+  } else {
+    // Forgot: re-queue 5 slots later, don't mark as completed yet
     const reinsertAt = Math.min(currentIdx + 5, queue.length);
     queue.splice(reinsertAt, 0, w);
   }
