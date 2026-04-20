@@ -152,6 +152,87 @@ body::before {
   max-width: 520px;
 }
 
+/* ---------- Enrichment sections ---------- */
+.enrichment {
+  width: 100%;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--hairline);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  text-align: left;
+}
+.enrich-section { width: 100%; }
+.enrich-section.side-by-side {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.enrich-section.hook {
+  background: var(--amber-ghost);
+  padding: 16px 20px;
+  border-left: 2px solid var(--amber);
+  border-radius: 0 2px 2px 0;
+}
+.enrich-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+.enrich-text {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-dim);
+}
+.enrich-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.enrich-list li {
+  font-family: var(--serif); font-style: italic;
+  font-size: 15px; line-height: 1.55;
+  color: var(--ink-dim);
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--hairline);
+}
+.enrich-list li:last-child { border-bottom: none; }
+.examples-list li::before {
+  content: "·";
+  color: var(--amber);
+  margin-right: 10px;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.chip-row {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.chip {
+  padding: 4px 10px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 2px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-dim);
+  background: transparent;
+}
+.chip.chip-ant {
+  border-color: rgba(200, 117, 102, 0.3);
+  color: rgba(200, 117, 102, 0.8);
+}
+
+/* ---------- Binary grade (2-button instead of 4) ---------- */
+.grades.binary {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 /* ---------- Grade row ---------- */
 .grades {
   width: 100%; max-width: 780px;

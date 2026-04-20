@@ -98,6 +98,17 @@
 
     <section class="section">
       <div class="section-head">
+        <h2 class="section-title">Retention curve · 记忆曲线</h2>
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.22em;color:var(--ink-faint)" id="retention-samples">—</div>
+      </div>
+      <p style="font-family:var(--serif);font-size:15px;color:var(--ink-dim);line-height:1.5;margin:0 0 20px">
+        基于"记得/不记得"的实际复习数据计算。虚线是理论遗忘曲线 (Ebbinghaus)，橙色是<span style="color:var(--amber)">你的真实记忆率</span>。
+      </p>
+      <div id="retention-chart" style="width:100%;height:360px"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
         <h2 class="section-title">By difficulty</h2>
       </div>
       <div class="diff-rows" id="diff-rows"></div>

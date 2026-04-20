@@ -14,7 +14,29 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "misaligned.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "out of sync",
+        "unaligned",
+        "off-target"
+      ],
+      "antonyms": [
+        "aligned",
+        "in sync",
+        "congruent"
+      ],
+      "etymology": "mis- (错) + align (对齐) + -ed → 没对齐的",
+      "examples": [
+        "The AI model's goals became misaligned with human values.",
+        "The wheels are misaligned, causing the car to pull left.",
+        "His actions were misaligned with what the company stood for."
+      ],
+      "collocations": [
+        "misaligned with values",
+        "misaligned incentives"
+      ],
+      "memory_hook": "mis（错）+ align（队列） = 没站对队 = 偏离",
+      "enriched": true
     },
     {
       "id": "sycophancy",
@@ -26,7 +48,29 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "sycophancy.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "flattery",
+        "obsequiousness",
+        "fawning"
+      ],
+      "antonyms": [
+        "candor",
+        "honesty",
+        "directness"
+      ],
+      "etymology": "希腊语 sykon（无花果）+ phainein（显示）→ 谄媚告密者",
+      "examples": [
+        "The AI model's sycophancy undermines its usefulness as a critic.",
+        "His sycophancy toward the boss disgusted his coworkers.",
+        "She saw through his sycophancy and remained unimpressed."
+      ],
+      "collocations": [
+        "sycophancy toward",
+        "model sycophancy"
+      ],
+      "memory_hook": "sy-co-phan-cy：'死磕拍马屁'",
+      "enriched": true
     },
     {
       "id": "valence",
@@ -38,7 +82,25 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "valence.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "polarity",
+        "charge",
+        "emotional tone"
+      ],
+      "antonyms": [],
+      "etymology": "拉丁语 valentia（力量）→ 情感的'力量方向'",
+      "examples": [
+        "Fear has a negative valence while joy has a positive valence.",
+        "Researchers measure both valence and arousal of emotions.",
+        "Words with negative valence activate different brain regions."
+      ],
+      "collocations": [
+        "positive/negative valence",
+        "valence and arousal"
+      ],
+      "memory_hook": "源自化学的'化合价'，引申为情感的'正负极'",
+      "enriched": true
     },
     {
       "id": "arousal",
@@ -50,7 +112,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "arousal.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "activation",
+        "excitement",
+        "stimulation"
+      ],
+      "antonyms": [
+        "calmness",
+        "sedation"
+      ],
+      "etymology": "a-（朝向）+ rouse（唤醒）→ 唤起的状态",
+      "examples": [
+        "High arousal emotions include anger and excitement.",
+        "The arousal level affects learning and memory.",
+        "Valence-arousal models classify emotions on two axes."
+      ],
+      "collocations": [
+        "emotional arousal",
+        "arousal level"
+      ],
+      "memory_hook": "arouse → 唤起 → arousal = 被唤起的程度",
+      "enriched": true
     },
     {
       "id": "residual",
@@ -62,7 +145,29 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "residual.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "remaining",
+        "leftover",
+        "remnant"
+      ],
+      "antonyms": [
+        "total",
+        "complete"
+      ],
+      "etymology": "拉丁语 residuum（剩余）→ 留下来的",
+      "examples": [
+        "The residual stream carries information between transformer layers.",
+        "Residual effects of the drug lasted for hours.",
+        "After the analysis, residual variance was only 3%."
+      ],
+      "collocations": [
+        "residual stream",
+        "residual connection",
+        "residual error"
+      ],
+      "memory_hook": "re-（回）+ sid（坐）→ '坐下来没走的'= 剩余",
+      "enriched": true
     },
     {
       "id": "variance",
@@ -74,7 +179,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "variance.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "variability",
+        "deviation",
+        "dispersion"
+      ],
+      "antonyms": [
+        "uniformity",
+        "consistency"
+      ],
+      "etymology": "vary（变化）+ -ance → 变化的程度",
+      "examples": [
+        "High variance in activations suggests instability.",
+        "The variance between the two samples was negligible.",
+        "Reducing variance is a key goal in machine learning."
+      ],
+      "collocations": [
+        "high/low variance",
+        "explain variance"
+      ],
+      "memory_hook": "vary（变）+ ance → 变的度量 = 方差",
+      "enriched": true
     },
     {
       "id": "prefill",
@@ -86,7 +212,24 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "prefill.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "pre-load",
+        "pre-populate"
+      ],
+      "antonyms": [],
+      "etymology": "pre-（事先）+ fill（填充）",
+      "examples": [
+        "Prefill the prompt to speed up inference.",
+        "The system prefills common fields to save time.",
+        "LLM inference uses prefill for the prompt tokens."
+      ],
+      "collocations": [
+        "prefill the prompt",
+        "prefill phase"
+      ],
+      "memory_hook": "pre + fill = 先填好",
+      "enriched": true
     },
     {
       "id": "cosine",
@@ -98,7 +241,21 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "cosine.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [],
+      "antonyms": [],
+      "etymology": "co-（互补）+ sine（正弦）→ 互补角的正弦",
+      "examples": [
+        "Cosine similarity measures the angle between two vectors.",
+        "The cosine of 0 degrees is 1.",
+        "Higher cosine similarity means more related embeddings."
+      ],
+      "collocations": [
+        "cosine similarity",
+        "cosine distance"
+      ],
+      "memory_hook": "co-sine：另一个角的 sine",
+      "enriched": true
     },
     {
       "id": "semantic",
@@ -110,7 +267,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "semantic.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "meaning-related",
+        "lexical"
+      ],
+      "antonyms": [
+        "syntactic",
+        "formal"
+      ],
+      "etymology": "希腊语 semantikos（意义的）",
+      "examples": [
+        "Semantic search understands meaning, not just keywords.",
+        "The two sentences are syntactically similar but semantically different.",
+        "Embeddings capture semantic relationships between words."
+      ],
+      "collocations": [
+        "semantic meaning",
+        "semantic search",
+        "semantic similarity"
+      ],
+      "memory_hook": "semantics = 语义学",
+      "enriched": true
     },
     {
       "id": "lexical",
@@ -122,7 +300,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "lexical.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "word-level",
+        "vocabulary-related"
+      ],
+      "antonyms": [
+        "semantic",
+        "conceptual"
+      ],
+      "etymology": "希腊语 lexikon（词典的）",
+      "examples": [
+        "Lexical similarity is not the same as semantic similarity.",
+        "The model performs lexical matching but misses meaning.",
+        "Lexical analysis is the first step in parsing."
+      ],
+      "collocations": [
+        "lexical vs semantic",
+        "lexical item",
+        "lexical analysis"
+      ],
+      "memory_hook": "lexicon（词典）+ al → 和词相关的",
+      "enriched": true
     },
     {
       "id": "circuitry",
@@ -134,7 +333,25 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "circuitry.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "network",
+        "system",
+        "wiring"
+      ],
+      "antonyms": [],
+      "etymology": "circuit（回路）+ -ry（集合）→ 回路系统",
+      "examples": [
+        "Neural circuitry in the brain processes emotions.",
+        "The circuitry of the device was too complex to repair.",
+        "We're mapping the circuitry that encodes specific concepts."
+      ],
+      "collocations": [
+        "neural circuitry",
+        "brain circuitry"
+      ],
+      "memory_hook": "circuit → circuitry = 一堆回路",
+      "enriched": true
     },
     {
       "id": "confounds",
@@ -146,7 +363,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "confounds.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "confusions",
+        "hidden variables",
+        "distractors"
+      ],
+      "antonyms": [
+        "controls",
+        "isolations"
+      ],
+      "etymology": "拉丁语 confundere（混淆在一起）",
+      "examples": [
+        "We controlled for confounds to isolate the causal effect.",
+        "Her unexpected response confounds my expectations.",
+        "Several confounds make the experiment hard to interpret."
+      ],
+      "collocations": [
+        "control for confounds",
+        "potential confounds"
+      ],
+      "memory_hook": "con-（一起）+ fund（底）→ 底都混一起 = 混淆",
+      "enriched": true
     },
     {
       "id": "correlation",
@@ -158,7 +396,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "correlation.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "association",
+        "link",
+        "relationship"
+      ],
+      "antonyms": [
+        "independence",
+        "causation"
+      ],
+      "etymology": "co-（共同）+ relate（关联）",
+      "examples": [
+        "Correlation does not imply causation.",
+        "We found a strong correlation between the two variables.",
+        "The correlation coefficient measures linear dependence."
+      ],
+      "collocations": [
+        "strong/weak correlation",
+        "positive/negative correlation"
+      ],
+      "memory_hook": "co- + relate → 共同关联 = 相关",
+      "enriched": true
     },
     {
       "id": "on-policy",
@@ -170,7 +429,23 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [],
+      "antonyms": [
+        "off-policy"
+      ],
+      "etymology": "强化学习术语：当前策略产生的数据",
+      "examples": [
+        "PPO is an on-policy RL algorithm.",
+        "On-policy methods are more stable but slower.",
+        "The system collects on-policy data during training."
+      ],
+      "collocations": [
+        "on-policy data",
+        "on-policy RL"
+      ],
+      "memory_hook": "on the policy = 遵循当前策略",
+      "enriched": true
     },
     {
       "id": "steering-experiment",
@@ -182,7 +457,24 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "activation patching",
+        "intervention"
+      ],
+      "antonyms": [],
+      "etymology": "steer（操控）+ experiment → 操控实验",
+      "examples": [
+        "Steering experiments inject vectors into the residual stream.",
+        "The steering experiment changed the model's mood successfully.",
+        "Interpretability research relies heavily on steering experiments."
+      ],
+      "collocations": [
+        "steering experiment",
+        "steering vector"
+      ],
+      "memory_hook": "steer（驾驶）→ 操控模型的方向",
+      "enriched": true
     },
     {
       "id": "unembed",
@@ -194,7 +486,27 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "decode",
+        "de-project"
+      ],
+      "antonyms": [
+        "embed",
+        "encode"
+      ],
+      "etymology": "un-（反）+ embed（嵌入）",
+      "examples": [
+        "The unembed matrix maps hidden states to logits.",
+        "Unembed is the inverse of embed in transformers.",
+        "Projecting via unembed reveals what tokens are being considered."
+      ],
+      "collocations": [
+        "unembed matrix",
+        "unembed layer"
+      ],
+      "memory_hook": "un-（反）+ embed = 解嵌入",
+      "enriched": true
     },
     {
       "id": "upweighted",
@@ -206,7 +518,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "upweighted.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "boosted",
+        "amplified",
+        "prioritized"
+      ],
+      "antonyms": [
+        "downweighted",
+        "suppressed"
+      ],
+      "etymology": "up-（向上）+ weight（权重）",
+      "examples": [
+        "These tokens get upweighted in the probability distribution.",
+        "Positive samples are upweighted during training.",
+        "The feature is upweighted when relevant context appears."
+      ],
+      "collocations": [
+        "upweighted tokens",
+        "upweighted features"
+      ],
+      "memory_hook": "up + weight = 权重向上调",
+      "enriched": true
     },
     {
       "id": "mean-activation",
@@ -218,7 +551,23 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "AI / ML 术语",
       "audio_file": "",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "average activation"
+      ],
+      "antonyms": [],
+      "etymology": "mean（平均）+ activation（激活）",
+      "examples": [
+        "Subtracting off the mean activation isolates the signal.",
+        "We computed the mean activation across all neurons.",
+        "The mean activation baseline helps detect anomalies."
+      ],
+      "collocations": [
+        "subtract mean activation",
+        "mean activation vector"
+      ],
+      "memory_hook": "所有激活的平均值",
+      "enriched": true
     },
     {
       "id": "underlie",
@@ -230,7 +579,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "underlie.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "underpin",
+        "form the basis",
+        "be behind"
+      ],
+      "antonyms": [
+        "contradict",
+        "oppose"
+      ],
+      "etymology": "under（下面）+ lie（躺）→ 躺在下面作为基础",
+      "examples": [
+        "Abstract representations underlie the model's behavior.",
+        "Several assumptions underlie this theory.",
+        "The principles that underlie democracy are widely shared."
+      ],
+      "collocations": [
+        "underlie behavior",
+        "principles that underlie"
+      ],
+      "memory_hook": "under + lie = 躺在下面 = 构成底层基础",
+      "enriched": true
     },
     {
       "id": "reminiscent",
@@ -242,7 +612,27 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "reminiscent.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "evocative of",
+        "similar to",
+        "reminiscing of"
+      ],
+      "antonyms": [
+        "unrelated",
+        "distinct"
+      ],
+      "etymology": "re-（再）+ mini-（小）+ -scent → 让人想起小事",
+      "examples": [
+        "The model's response was reminiscent of human emotion.",
+        "The smell is reminiscent of my grandmother's kitchen.",
+        "His style is reminiscent of early jazz."
+      ],
+      "collocations": [
+        "reminiscent of"
+      ],
+      "memory_hook": "remind（提醒）→ reminiscent = 让人想起",
+      "enriched": true
     },
     {
       "id": "generalize",
@@ -254,7 +644,29 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "generalize.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "extrapolate",
+        "extend",
+        "broaden"
+      ],
+      "antonyms": [
+        "specialize",
+        "narrow"
+      ],
+      "etymology": "general（一般的）+ -ize（使…化）",
+      "examples": [
+        "The model failed to generalize across contexts.",
+        "You can't generalize from just one example.",
+        "Good models generalize well to unseen data."
+      ],
+      "collocations": [
+        "generalize across",
+        "generalize to",
+        "generalize from"
+      ],
+      "memory_hook": "general → generalize = 把具体变成一般",
+      "enriched": true
     },
     {
       "id": "mediated",
@@ -266,7 +678,26 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "mediated.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "transmitted through",
+        "carried by"
+      ],
+      "antonyms": [
+        "direct",
+        "unmediated"
+      ],
+      "etymology": "medi-（中间）+ -ated → 通过中间物的",
+      "examples": [
+        "Behaviors are mediated by underlying representations.",
+        "The dispute was mediated by a neutral third party.",
+        "Emotions are mediated by neural circuits."
+      ],
+      "collocations": [
+        "mediated by"
+      ],
+      "memory_hook": "media（媒介）→ mediated = 通过媒介传递的",
+      "enriched": true
     },
     {
       "id": "operative",
@@ -278,7 +709,29 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "operative.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "active",
+        "in effect",
+        "functional"
+      ],
+      "antonyms": [
+        "inactive",
+        "dormant"
+      ],
+      "etymology": "operate（运作）+ -ive → 正在运作的",
+      "examples": [
+        "The operative emotion in the response is frustration.",
+        "The operative word here is 'might'.",
+        "The law is no longer operative."
+      ],
+      "collocations": [
+        "operative emotion",
+        "operative word",
+        "operative factor"
+      ],
+      "memory_hook": "operate → operative = 在起作用的",
+      "enriched": true
     },
     {
       "id": "provoke",
@@ -290,7 +743,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "provoke.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "trigger",
+        "incite",
+        "elicit"
+      ],
+      "antonyms": [
+        "soothe",
+        "calm"
+      ],
+      "etymology": "pro-（向前）+ voke（呼喊）→ 呼唤出来",
+      "examples": [
+        "The comment provoked a strong response.",
+        "Don't provoke the dog.",
+        "The paper aims to provoke discussion."
+      ],
+      "collocations": [
+        "provoke a response",
+        "provoke thought"
+      ],
+      "memory_hook": "pro（前）+ voke（叫） = 把…叫出来 = 激起",
+      "enriched": true
     },
     {
       "id": "evoke",
@@ -302,7 +776,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "evoke.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "bring to mind",
+        "elicit",
+        "conjure"
+      ],
+      "antonyms": [
+        "suppress",
+        "stifle"
+      ],
+      "etymology": "e-（出来）+ voke（呼喊）→ 呼出",
+      "examples": [
+        "The scenario was designed to evoke emotion in the model.",
+        "The old song evoked memories of childhood.",
+        "Her words evoke a sense of nostalgia."
+      ],
+      "collocations": [
+        "evoke emotion",
+        "evoke memories"
+      ],
+      "memory_hook": "e-（向外）+ voke（叫） = 唤出来 = 唤起",
+      "enriched": true
     },
     {
       "id": "intuitively",
@@ -314,7 +809,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "intuitively.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "instinctively",
+        "naturally",
+        "by gut"
+      ],
+      "antonyms": [
+        "analytically",
+        "deliberately"
+      ],
+      "etymology": "intuition（直觉）+ -ly",
+      "examples": [
+        "Intuitively, we expect larger models to be more accurate.",
+        "She intuitively knew something was wrong.",
+        "The interface is intuitively designed."
+      ],
+      "collocations": [
+        "intuitively obvious",
+        "intuitively appealing"
+      ],
+      "memory_hook": "intuition（直觉）→ intuitively = 凭直觉地",
+      "enriched": true
     },
     {
       "id": "connotations",
@@ -326,7 +842,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "connotations.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "implications",
+        "overtones",
+        "undertones"
+      ],
+      "antonyms": [
+        "denotation",
+        "literal meaning"
+      ],
+      "etymology": "con-（伴随）+ notation（标记）→ 伴随的含义",
+      "examples": [
+        "The word 'cheap' has negative connotations.",
+        "Her tone carried connotations of disapproval.",
+        "The phrase has different connotations in different cultures."
+      ],
+      "collocations": [
+        "negative/positive connotations",
+        "cultural connotations"
+      ],
+      "memory_hook": "con-（一起）+ notation（含义） = 附带的弦外之音",
+      "enriched": true
     },
     {
       "id": "notable",
@@ -338,7 +875,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "notable.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "significant",
+        "noteworthy",
+        "remarkable"
+      ],
+      "antonyms": [
+        "unremarkable",
+        "insignificant"
+      ],
+      "etymology": "note（注意）+ -able（能够）",
+      "examples": [
+        "One notable exception is the emotion vector paper.",
+        "She is a notable figure in AI research.",
+        "The notable thing is how fast it learns."
+      ],
+      "collocations": [
+        "a notable exception",
+        "notable figure"
+      ],
+      "memory_hook": "note-able = 值得记下来的",
+      "enriched": true
     },
     {
       "id": "mitigate",
@@ -350,7 +908,29 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "mitigate.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "reduce",
+        "alleviate",
+        "lessen"
+      ],
+      "antonyms": [
+        "exacerbate",
+        "worsen"
+      ],
+      "etymology": "拉丁语 mitigare（使温和）",
+      "examples": [
+        "To mitigate confounds, we controlled for several variables.",
+        "The policy aims to mitigate climate risk.",
+        "Apologies can mitigate damage to a relationship."
+      ],
+      "collocations": [
+        "mitigate risk",
+        "mitigate damage",
+        "mitigate confounds"
+      ],
+      "memory_hook": "mit-（温和）+ -igate → 使温和 = 减轻",
+      "enriched": true
     },
     {
       "id": "inspecting",
@@ -362,7 +942,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "inspecting.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "examining",
+        "checking",
+        "scrutinizing"
+      ],
+      "antonyms": [
+        "ignoring",
+        "overlooking"
+      ],
+      "etymology": "in-（里面）+ spect（看）→ 看进去",
+      "examples": [
+        "Inspecting the activations reveals what features are active.",
+        "She spent hours inspecting the contract.",
+        "Before buying, inspect the car thoroughly."
+      ],
+      "collocations": [
+        "inspecting the activations",
+        "closely inspecting"
+      ],
+      "memory_hook": "in + spect = 往里看 = 检查",
+      "enriched": true
     },
     {
       "id": "snippets",
@@ -374,7 +975,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "snippets.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "fragments",
+        "excerpts",
+        "bits"
+      ],
+      "antonyms": [
+        "whole",
+        "entirety"
+      ],
+      "etymology": "snip（剪）+ -et → 剪下来的小段",
+      "examples": [
+        "We trained on text snippets from academic papers.",
+        "Save useful code snippets for later.",
+        "She shared snippets from her journal."
+      ],
+      "collocations": [
+        "text snippets",
+        "code snippets"
+      ],
+      "memory_hook": "snip（剪一下）→ snippet = 剪下来的小片段",
+      "enriched": true
     },
     {
       "id": "elevated",
@@ -386,7 +1008,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "elevated.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "raised",
+        "increased",
+        "heightened"
+      ],
+      "antonyms": [
+        "lowered",
+        "reduced"
+      ],
+      "etymology": "e-（向上）+ levate（升起）",
+      "examples": [
+        "Elevated activation in this region correlates with fear.",
+        "His elevated status came with more responsibility.",
+        "The elevated platform offered a better view."
+      ],
+      "collocations": [
+        "elevated activation",
+        "elevated levels"
+      ],
+      "memory_hook": "elevator（电梯）→ elevated = 被升起的",
+      "enriched": true
     },
     {
       "id": "propensity",
@@ -398,7 +1041,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "propensity.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "tendency",
+        "inclination",
+        "predisposition"
+      ],
+      "antonyms": [
+        "aversion",
+        "reluctance"
+      ],
+      "etymology": "拉丁语 propensus（倾斜）→ 倾向性",
+      "examples": [
+        "The model has a propensity to refuse harmless requests.",
+        "He has a propensity for hyperbole.",
+        "Some people have a propensity to worry."
+      ],
+      "collocations": [
+        "propensity to",
+        "propensity for"
+      ],
+      "memory_hook": "pro-（前）+ pens（挂） → 向前倾 = 倾向",
+      "enriched": true
     },
     {
       "id": "inclined",
@@ -410,7 +1074,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "inclined.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "disposed",
+        "prone",
+        "apt"
+      ],
+      "antonyms": [
+        "disinclined",
+        "reluctant"
+      ],
+      "etymology": "in-（向）+ clin-（倾斜）→ 倾向于",
+      "examples": [
+        "I'm inclined to agree with you.",
+        "She was inclined toward a career in music.",
+        "The model is inclined to produce verbose answers."
+      ],
+      "collocations": [
+        "inclined to",
+        "inclined toward"
+      ],
+      "memory_hook": "incline（斜坡）→ inclined = 心里倾斜过去",
+      "enriched": true
     },
     {
       "id": "scenarios",
@@ -422,7 +1107,25 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "scenarios.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "situations",
+        "contexts",
+        "cases"
+      ],
+      "antonyms": [],
+      "etymology": "意大利语 scenario（剧情）",
+      "examples": [
+        "We tested on synthetic scenarios.",
+        "Consider various scenarios before deciding.",
+        "Worst-case scenarios must be planned for."
+      ],
+      "collocations": [
+        "synthetic scenarios",
+        "worst-case scenario"
+      ],
+      "memory_hook": "scene（场景）→ scenarios = 一幕幕剧情",
+      "enriched": true
     },
     {
       "id": "synthetic",
@@ -434,7 +1137,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "synthetic.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "artificial",
+        "man-made",
+        "manufactured"
+      ],
+      "antonyms": [
+        "natural",
+        "organic"
+      ],
+      "etymology": "希腊语 synthetikos（合成的）",
+      "examples": [
+        "We used synthetic data to train the model.",
+        "Synthetic fabrics dry faster than cotton.",
+        "The study used synthetic scenarios for clean experimental control."
+      ],
+      "collocations": [
+        "synthetic data",
+        "synthetic scenarios"
+      ],
+      "memory_hook": "syn-（一起）+ thetic（放置） = 合在一起 = 合成的",
+      "enriched": true
     },
     {
       "id": "numerical",
@@ -446,7 +1170,27 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "numerical.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "numeric",
+        "quantitative"
+      ],
+      "antonyms": [
+        "categorical",
+        "qualitative"
+      ],
+      "etymology": "number（数字）+ -ical",
+      "examples": [
+        "We added numerical quantities to test the hypothesis.",
+        "The numerical results are in the appendix.",
+        "Convert the categories to numerical values."
+      ],
+      "collocations": [
+        "numerical value",
+        "numerical analysis"
+      ],
+      "memory_hook": "number → numerical = 和数字相关的",
+      "enriched": true
     },
     {
       "id": "alternative",
@@ -458,7 +1202,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "alternative.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "other option",
+        "substitute",
+        "choice"
+      ],
+      "antonyms": [
+        "original",
+        "only option"
+      ],
+      "etymology": "拉丁语 alter（另一个）",
+      "examples": [
+        "We considered an alternative hypothesis.",
+        "Is there an alternative route?",
+        "The alternative is to wait until tomorrow."
+      ],
+      "collocations": [
+        "alternative hypothesis",
+        "alternative route"
+      ],
+      "memory_hook": "alter（改变）→ alternative = 另一个选择",
+      "enriched": true
     },
     {
       "id": "dialogues",
@@ -470,7 +1235,26 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "dialogues.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "conversations",
+        "exchanges"
+      ],
+      "antonyms": [
+        "monologues"
+      ],
+      "etymology": "希腊语 dia-（之间）+ logos（话）→ 两人之间的话",
+      "examples": [
+        "The model was trained on millions of dialogues.",
+        "Classical philosophy often takes the form of dialogues.",
+        "Dialogues between the two speakers reveal their personalities."
+      ],
+      "collocations": [
+        "model dialogues",
+        "open dialogues"
+      ],
+      "memory_hook": "dia-（两个）+ logos（话） = 对话",
+      "enriched": true
     },
     {
       "id": "afflicted",
@@ -482,7 +1266,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "学术/论文高频词",
       "audio_file": "afflicted.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "troubled",
+        "plagued",
+        "tormented"
+      ],
+      "antonyms": [
+        "relieved",
+        "comforted"
+      ],
+      "etymology": "拉丁语 affligere（打击）→ 被打击的",
+      "examples": [
+        "The character was afflicted with deep sadness.",
+        "Regions afflicted by drought need aid.",
+        "She was afflicted with a rare disease."
+      ],
+      "collocations": [
+        "afflicted with",
+        "afflicted by"
+      ],
+      "memory_hook": "a-（向）+ flict（打击） = 被打击 = 受折磨的",
+      "enriched": true
     },
     {
       "id": "gloomy",
@@ -494,7 +1299,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "情感/描述词",
       "audio_file": "gloomy.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "melancholy",
+        "dismal",
+        "somber"
+      ],
+      "antonyms": [
+        "cheerful",
+        "bright"
+      ],
+      "etymology": "gloom（阴郁）+ -y",
+      "examples": [
+        "He was in a gloomy mood after the news.",
+        "The gloomy weather matched her mood.",
+        "The movie has a gloomy atmosphere throughout."
+      ],
+      "collocations": [
+        "gloomy mood",
+        "gloomy atmosphere"
+      ],
+      "memory_hook": "gloom（阴暗）+ -y = 阴郁的",
+      "enriched": true
     },
     {
       "id": "hostile",
@@ -506,7 +1332,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "情感/描述词",
       "audio_file": "hostile.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "antagonistic",
+        "aggressive",
+        "adversarial"
+      ],
+      "antonyms": [
+        "friendly",
+        "welcoming"
+      ],
+      "etymology": "拉丁语 hostilis（敌人的）",
+      "examples": [
+        "The response was hostile and aggressive.",
+        "A hostile work environment is unacceptable.",
+        "He gave her a hostile look."
+      ],
+      "collocations": [
+        "hostile response",
+        "hostile takeover"
+      ],
+      "memory_hook": "host（主人）的反义是 guest，但 hostile = '敌对的'（记反过来）",
+      "enriched": true
     },
     {
       "id": "neutral",
@@ -518,7 +1365,28 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "情感/描述词",
       "audio_file": "neutral.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "impartial",
+        "unbiased",
+        "middle"
+      ],
+      "antonyms": [
+        "partisan",
+        "biased"
+      ],
+      "etymology": "拉丁语 neuter（两者都不）",
+      "examples": [
+        "The statement has neutral valence.",
+        "Switzerland is famously neutral.",
+        "Let's keep the color neutral — beige or gray."
+      ],
+      "collocations": [
+        "neutral valence",
+        "neutral party"
+      ],
+      "memory_hook": "neu-（非）+ -tral → 两头都不 = 中立",
+      "enriched": true
     },
     {
       "id": "shallow-pattern-matching",
@@ -530,7 +1398,26 @@
       "source": "Emotion Concepts and their Function in a LLM",
       "category": "情感/描述词",
       "audio_file": "shallow-pattern-matching.mp3",
-      "added": "2026-04-18"
+      "added": "2026-04-18",
+      "synonyms": [
+        "surface matching",
+        "superficial matching"
+      ],
+      "antonyms": [
+        "deep understanding",
+        "semantic matching"
+      ],
+      "etymology": "shallow（浅）+ pattern matching（模式匹配）",
+      "examples": [
+        "The model does shallow pattern-matching, not true understanding.",
+        "Critics argue LLMs rely on shallow pattern-matching.",
+        "Shallow pattern-matching breaks under distribution shift."
+      ],
+      "collocations": [
+        "shallow pattern-matching vs understanding"
+      ],
+      "memory_hook": "只看表面不看本质的'硬套模板'",
+      "enriched": true
     },
     {
       "id": "bundled",
@@ -542,7 +1429,28 @@
       "source": "All-In Podcast",
       "category": "情感/描述词",
       "audio_file": "bundled.mp3",
-      "added": "2026-04-14"
+      "added": "2026-04-14",
+      "synonyms": [
+        "packaged",
+        "combined",
+        "grouped"
+      ],
+      "antonyms": [
+        "separated",
+        "unbundled"
+      ],
+      "etymology": "bundle（捆）+ -ed",
+      "examples": [
+        "The features are bundled together in one subscription.",
+        "Software bundled with the OS is often unwanted.",
+        "They bundled the services to raise the price."
+      ],
+      "collocations": [
+        "bundled together",
+        "bundled pricing"
+      ],
+      "memory_hook": "bundle（捆）→ bundled = 被捆在一起的",
+      "enriched": true
     },
     {
       "id": "price-discrimination",
@@ -554,7 +1462,27 @@
       "source": "All-In Podcast",
       "category": "情感/描述词",
       "audio_file": "price-discrimination.mp3",
-      "added": "2026-04-14"
+      "added": "2026-04-14",
+      "synonyms": [
+        "differential pricing",
+        "dynamic pricing"
+      ],
+      "antonyms": [
+        "uniform pricing",
+        "flat pricing"
+      ],
+      "etymology": "price（价格）+ discrimination（区别对待）",
+      "examples": [
+        "That's basically price discrimination — different prices for different customers.",
+        "Airlines use price discrimination based on booking time.",
+        "Economists debate whether price discrimination is fair."
+      ],
+      "collocations": [
+        "price discrimination",
+        "second-degree price discrimination"
+      ],
+      "memory_hook": "对不同客户要不同价 = 价格歧视",
+      "enriched": true
     },
     {
       "id": "cynical",
@@ -566,7 +1494,29 @@
       "source": "All-In Podcast",
       "category": "情感/描述词",
       "audio_file": "cynical.mp3",
-      "added": "2026-04-14"
+      "added": "2026-04-14",
+      "synonyms": [
+        "skeptical",
+        "distrustful",
+        "pessimistic"
+      ],
+      "antonyms": [
+        "trusting",
+        "optimistic",
+        "idealistic"
+      ],
+      "etymology": "希腊语 Kynikos（犬儒派）→ 看穿虚伪的",
+      "examples": [
+        "I know this is the cynical side, but it feels like marketing.",
+        "Years of disappointment made her cynical.",
+        "A cynical interpretation would say he did it for attention."
+      ],
+      "collocations": [
+        "cynical view",
+        "cynical interpretation"
+      ],
+      "memory_hook": "cyn- ~ 犬 → 犬儒主义 = 怀疑一切",
+      "enriched": true
     },
     {
       "id": "insinuating",
@@ -578,7 +1528,28 @@
       "source": "All-In Podcast",
       "category": "情感/描述词",
       "audio_file": "insinuating.mp3",
-      "added": "2026-04-14"
+      "added": "2026-04-14",
+      "synonyms": [
+        "implying",
+        "hinting at",
+        "suggesting"
+      ],
+      "antonyms": [
+        "stating directly",
+        "declaring"
+      ],
+      "etymology": "拉丁语 insinuare（曲折地进入）",
+      "examples": [
+        "Are you insinuating they blocked it on purpose?",
+        "His smile was insinuating rather than friendly.",
+        "She insinuated herself into the group slowly."
+      ],
+      "collocations": [
+        "insinuating that",
+        "insinuating remark"
+      ],
+      "memory_hook": "in-（里面）+ sinu-（弯曲）→ 拐弯抹角地说 = 暗示",
+      "enriched": true
     },
     {
       "id": "already",
@@ -590,7 +1561,28 @@
       "source": "All-In Podcast",
       "category": "情感/描述词",
       "audio_file": "already.mp3",
-      "added": "2026-04-14"
+      "added": "2026-04-14",
+      "synonyms": [
+        "by now",
+        "previously"
+      ],
+      "antonyms": [
+        "not yet",
+        "still"
+      ],
+      "etymology": "all + ready → 全部准备好了",
+      "examples": [
+        "Does Anthropic already have market dominance?",
+        "I've already eaten, thanks.",
+        "Is it already 5 o'clock? (expressing surprise)"
+      ],
+      "collocations": [
+        "already done",
+        "already there"
+      ],
+      "memory_hook": "all-ready = 全就位 = 已经",
+      "enriched": true
     }
-  ]
+  ],
+  "enriched_at": "2026-04-20T00:30:00"
 }

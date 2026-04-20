@@ -1,4 +1,4 @@
-// review.js — flashcard review page
+// review.js — flashcard with auto-play audio + binary remember/forgot
 import { loadWords, loadState, setCardState, schedule, isDue, previewIntervals, playAudio, formatDue } from './app.js';
 
 let words = [];
@@ -17,12 +17,9 @@ async function init() {
   const state = loadState();
   const now = new Date();
 
-  queue = words.filter(w => {
-    const cs = state[w.id];
-    return isDue(cs, now);
-  });
+  queue = words.filter(w => isDue(state[w.id], now));
 
-  // Sort: new first, then overdue, then due
+  // Interleave: new first, then due (overdue first)
   queue.sort((a, b) => {
     const sa = state[a.id], sb = state[b.id];
     if (!sa && sb) return -1;
@@ -40,7 +37,7 @@ function renderEmpty() {
   stage.innerHTML = `
     <div class="empty">
       <h2>All caught up<span class="amber-accent">.</span></h2>
-      <p>No cards due right now. Add more words to your <a href="library.html" style="color:var(--amber)">library</a>, or come back later.</p>
+      <p>No cards due right now. Come back later or go to <a href="library.html" style="color:var(--amber)">library</a>.</p>
     </div>`;
 }
 
@@ -63,7 +60,7 @@ function renderCard() {
           <span class="sep">—</span>
           <span>${w.source || 'English'}</span>
         </div>
-        <button class="speaker" id="btn-speak" aria-label="Pronounce">
+        <button class="speaker" id="btn-speak" aria-label="Pronounce" title="Replay (S)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 10v4h3l5 4V6L7 10H4z"/>
             <path d="M16 8.5c1.2 1 1.2 6 0 7" opacity="0.7"/>
@@ -82,28 +79,96 @@ function renderCard() {
         <div class="divider"></div>
         <p class="meaning">${w.meaning_zh || ''}</p>
         ${w.example ? `<p class="example">"${w.example}"</p>` : ''}
-        ${w.synonyms ? `<div class="synonyms">${w.synonyms.map(s => `<span class="chip">${s}</span>`).join('')}</div>` : ''}
-        ${w.etymology ? `<div class="etymology">${w.etymology}</div>` : ''}
+
+        ${renderEnrichment(w)}
       </section>
 
-      <div class="grades" role="group" style="display:none" id="grades">
-        <button class="grade again" data-key="1"><span class="gkey">1</span><span class="glabel">Again</span><span class="gmeta">${intervals.again}</span></button>
-        <button class="grade hard"  data-key="2"><span class="gkey">2</span><span class="glabel">Hard</span><span class="gmeta">${intervals.hard}</span></button>
-        <button class="grade good primary" data-key="3"><span class="gkey">3</span><span class="glabel">Good</span><span class="gmeta">${intervals.good}</span></button>
-        <button class="grade easy" data-key="4"><span class="gkey">4</span><span class="glabel">Easy</span><span class="gmeta">${intervals.easy}</span></button>
+      <div class="grades binary" role="group" style="display:none" id="grades">
+        <button class="grade again" data-key="1">
+          <span class="gkey">1</span>
+          <span class="glabel">不记得</span>
+          <span class="gmeta">${intervals.forgot}</span>
+        </button>
+        <button class="grade good primary" data-key="2">
+          <span class="gkey">2</span>
+          <span class="glabel">记得</span>
+          <span class="gmeta">${intervals.remembered}</span>
+        </button>
       </div>
     </div>`;
 
   document.getElementById('btn-speak').addEventListener('click', () => playAudio(w));
   document.querySelectorAll('.grade').forEach(b => {
-    b.addEventListener('click', () => grade(parseInt(b.dataset.key)));
+    b.addEventListener('click', () => grade(b.dataset.key === '2'));
   });
 
   if (prev) {
-    fsrsMetaEl.textContent = `FSRS · S=${prev.stability.toFixed(1)} · D=${prev.difficulty.toFixed(1)} · reps=${prev.reps}`;
+    fsrsMetaEl.textContent = `Box ${prev.box} · ${prev.remembered}✓ ${prev.forgot}✗ · reps=${prev.reps}`;
   } else {
-    fsrsMetaEl.textContent = 'FSRS · new card';
+    fsrsMetaEl.textContent = 'NEW card';
   }
+
+  // Auto-play audio when card shows
+  setTimeout(() => playAudio(w), 200);
+}
+
+function renderEnrichment(w) {
+  if (!w.enriched) return '';
+  const parts = [];
+
+  if (w.examples && w.examples.length) {
+    parts.push(`
+      <div class="enrich-section">
+        <div class="enrich-label">Examples</div>
+        <ul class="enrich-list examples-list">
+          ${w.examples.map(e => `<li>${escapeHtml(e)}</li>`).join('')}
+        </ul>
+      </div>`);
+  }
+
+  if ((w.synonyms && w.synonyms.length) || (w.antonyms && w.antonyms.length)) {
+    parts.push(`
+      <div class="enrich-section side-by-side">
+        ${w.synonyms && w.synonyms.length ? `<div>
+          <div class="enrich-label">Synonyms</div>
+          <div class="chip-row">${w.synonyms.map(s => `<span class="chip">${escapeHtml(s)}</span>`).join('')}</div>
+        </div>` : ''}
+        ${w.antonyms && w.antonyms.length ? `<div>
+          <div class="enrich-label">Antonyms</div>
+          <div class="chip-row">${w.antonyms.map(s => `<span class="chip chip-ant">${escapeHtml(s)}</span>`).join('')}</div>
+        </div>` : ''}
+      </div>`);
+  }
+
+  if (w.etymology) {
+    parts.push(`
+      <div class="enrich-section">
+        <div class="enrich-label">Etymology · 词源</div>
+        <div class="enrich-text">${escapeHtml(w.etymology)}</div>
+      </div>`);
+  }
+
+  if (w.memory_hook) {
+    parts.push(`
+      <div class="enrich-section hook">
+        <div class="enrich-label">Memory hook · 记忆钩子</div>
+        <div class="enrich-text">${escapeHtml(w.memory_hook)}</div>
+      </div>`);
+  }
+
+  if (w.collocations && w.collocations.length) {
+    parts.push(`
+      <div class="enrich-section">
+        <div class="enrich-label">Collocations</div>
+        <div class="chip-row">${w.collocations.map(s => `<span class="chip">${escapeHtml(s)}</span>`).join('')}</div>
+      </div>`);
+  }
+
+  return parts.length ? `<div class="enrichment">${parts.join('')}</div>` : '';
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
 function reveal() {
@@ -113,13 +178,19 @@ function reveal() {
   document.getElementById('grades').style.display = '';
 }
 
-function grade(rating) {
+function grade(remembered) {
   if (!revealed) return reveal();
   const w = queue[currentIdx];
   const state = loadState();
   const prev = state[w.id];
-  const next = schedule(prev, rating);
-  setCardState(w.id, next);
+  setCardState(w.id, schedule(prev, remembered));
+
+  // If forgot, re-queue this card near the end of session
+  if (!remembered) {
+    const reinsertAt = Math.min(currentIdx + 5, queue.length);
+    queue.splice(reinsertAt, 0, w);
+  }
+
   currentIdx++;
   setTimeout(renderCard, 120);
 }
@@ -128,17 +199,17 @@ function renderDone() {
   stage.innerHTML = `
     <div class="empty">
       <h2>Session complete<span class="amber-accent">.</span></h2>
-      <p>${queue.length} cards reviewed. Come back tomorrow — your brain needs sleep to consolidate.</p>
-      <p style="margin-top:20px"><a href="stats.html" style="color:var(--amber)">View stats →</a></p>
+      <p>${queue.length} cards reviewed. Your brain needs sleep to consolidate — come back tomorrow.</p>
+      <p style="margin-top:20px"><a href="stats.html" style="color:var(--amber)">View retention curve →</a></p>
     </div>`;
   sessionEl.textContent = `${queue.length} / ${queue.length}`;
 }
 
-// Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
   if (e.target.tagName === 'INPUT') return;
   if (e.key === ' ') { e.preventDefault(); reveal(); }
-  if (e.key >= '1' && e.key <= '4') grade(parseInt(e.key));
+  if (e.key === '1') grade(false);
+  if (e.key === '2') grade(true);
   if (e.key.toLowerCase() === 's') {
     const w = queue[currentIdx];
     if (w) playAudio(w);
