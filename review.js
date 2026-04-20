@@ -1,14 +1,15 @@
-// review.js — flashcard with auto-play audio + binary remember/forgot
-import { loadWords, loadState, setCardState, schedule, isDue, previewIntervals, playAudio, formatDue, getTodayPlan, markPlanCompleted } from './app.js';
+// review.js — flashcard with auto-play audio + binary remember/forgot + integrated plan header
+import { loadWords, loadState, setCardState, schedule, isDue, previewIntervals, playAudio, formatDue, getTodayPlan, markPlanCompleted, computeRetention14d } from './app.js';
+
+const WEEKDAYS_ZH = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
 
 let words = [];
 let queue = [];
+let plan = null;
 let currentIdx = 0;
 let revealed = false;
 
 const stage = document.getElementById('stage');
-const sessionEl = document.getElementById('session-progress');
-const dueCountEl = document.getElementById('due-count');
 const fsrsMetaEl = document.getElementById('fsrs-meta');
 
 async function init() {
@@ -17,7 +18,7 @@ async function init() {
   const state = loadState();
 
   // Use today's plan (cached per day)
-  const plan = getTodayPlan(words, state);
+  plan = getTodayPlan(words, state);
   const byId = Object.fromEntries(words.map(w => [w.id, w]));
 
   // Filter out already completed in today's plan
@@ -35,16 +36,79 @@ async function init() {
     return 0;
   });
 
-  dueCountEl.textContent = plan.due_ids.length + plan.new_ids.length;
+  renderPlanHeader(state);
+
   if (queue.length === 0) return renderEmpty();
   renderCard();
+}
+
+function renderPlanHeader(state) {
+  const now = new Date();
+  document.getElementById('plan-weekday').textContent = WEEKDAYS_ZH[now.getDay()];
+  document.getElementById('plan-date').textContent = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')}`;
+
+  const total = plan.due_ids.length + plan.new_ids.length;
+  const done = plan.completed_ids.filter(id =>
+    plan.due_ids.includes(id) || plan.new_ids.includes(id)
+  ).length;
+  const remaining = total - done;
+  const pct = total ? Math.round(done / total * 100) : 0;
+
+  document.getElementById('plan-done').textContent = done;
+  document.getElementById('plan-total').textContent = total;
+  document.getElementById('plan-remaining').textContent = remaining === 0 ? 'done' : `${remaining} left`;
+  document.getElementById('plan-progress-fill').style.width = `${pct}%`;
+
+  // Week stats
+  document.getElementById('stat-streak').textContent = computeStreak(state);
+
+  let reviewsCount = 0;
+  for (const id in state) {
+    const hist = state[id]?.history || [];
+    for (const h of hist) {
+      if ((now - new Date(h.t)) / 86400000 < 7) reviewsCount++;
+    }
+  }
+  document.getElementById('stat-reviews').textContent = reviewsCount;
+
+  const ret = computeRetention14d(state);
+  document.getElementById('stat-retention').textContent = ret != null ? Math.round(ret * 100) : '—';
+
+  const mastered = words.filter(w => state[w.id]?.state === 'mature').length;
+  document.getElementById('stat-mastered').textContent = mastered;
+  document.getElementById('stat-total').textContent = words.length;
+}
+
+function computeStreak(state) {
+  const days = new Set();
+  for (const id in state) {
+    if (state[id]?.lastReview) days.add(state[id].lastReview.slice(0, 10));
+  }
+  if (days.size === 0) return 0;
+  let streak = 0;
+  const today = new Date();
+  for (let i = 0; i < 365; i++) {
+    const d = new Date(today.getTime() - i * 86400000).toISOString().slice(0, 10);
+    if (days.has(d)) streak++;
+    else if (i > 0) break;
+  }
+  return streak;
 }
 
 function renderEmpty() {
   stage.innerHTML = `
     <div class="empty">
       <h2>All caught up<span class="amber-accent">.</span></h2>
-      <p>No cards due right now. Come back later or go to <a href="library.html" style="color:var(--amber)">library</a>.</p>
+      <p>No cards scheduled for today. Add more words to your <a href="library.html" style="color:var(--amber)">library</a> or come back tomorrow.</p>
+    </div>`;
+}
+
+function renderDone() {
+  stage.innerHTML = `
+    <div class="empty">
+      <h2>Session complete<span class="amber-accent">.</span></h2>
+      <p>${queue.length} cards reviewed. Your brain needs sleep to consolidate.</p>
+      <p style="margin-top:20px"><a href="stats.html" style="color:var(--amber)">View retention curve →</a></p>
     </div>`;
 }
 
@@ -55,7 +119,6 @@ function renderCard() {
   const prev = state[w.id];
   const intervals = previewIntervals(prev);
 
-  sessionEl.textContent = `${currentIdx + 1} / ${queue.length}`;
   revealed = false;
 
   stage.innerHTML = `
@@ -192,7 +255,7 @@ function grade(remembered) {
   const prev = state[w.id];
   setCardState(w.id, schedule(prev, remembered));
 
-  // Mark as completed in today's plan (so home page progress updates)
+  // Mark as completed in today's plan (so progress bar updates)
   if (remembered) {
     markPlanCompleted(w.id);
   } else {
@@ -202,18 +265,10 @@ function grade(remembered) {
   }
 
   currentIdx++;
+  renderPlanHeader(loadState()); // live-update header
   setTimeout(renderCard, 120);
 }
 
-function renderDone() {
-  stage.innerHTML = `
-    <div class="empty">
-      <h2>Session complete<span class="amber-accent">.</span></h2>
-      <p>${queue.length} cards reviewed. Your brain needs sleep to consolidate — come back tomorrow.</p>
-      <p style="margin-top:20px"><a href="stats.html" style="color:var(--amber)">View retention curve →</a></p>
-    </div>`;
-  sessionEl.textContent = `${queue.length} / ${queue.length}`;
-}
 
 document.addEventListener('keydown', (e) => {
   if (e.target.tagName === 'INPUT') return;
