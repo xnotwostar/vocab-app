@@ -258,6 +258,8 @@ function grade(remembered) {
   // Mark as completed in today's plan (so progress bar updates)
   if (remembered) {
     markPlanCompleted(w.id);
+    // Keep in-memory plan in sync with localStorage
+    if (!plan.completed_ids.includes(w.id)) plan.completed_ids.push(w.id);
   } else {
     // Forgot: re-queue 5 slots later, don't mark as completed yet
     const reinsertAt = Math.min(currentIdx + 5, queue.length);
