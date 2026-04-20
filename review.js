@@ -190,15 +190,6 @@ function renderCard() {
     });
   });
 
-  // Tap anywhere on card (except buttons) to reveal
-  const cardFrame = stage.querySelector('.card-frame');
-  if (cardFrame) {
-    cardFrame.addEventListener('click', (e) => {
-      if (e.target.closest('button, a')) return;
-      if (!revealed) reveal();
-    });
-  }
-
   if (prev) {
     fsrsMetaEl.textContent = `Box ${prev.box} · ${prev.remembered}✓ ${prev.forgot}✗ · reps=${prev.reps}`;
   } else {
@@ -306,6 +297,14 @@ document.addEventListener('keydown', (e) => {
     const w = queue[currentIdx];
     if (w) playAudio(w);
   }
+});
+
+// Tap anywhere (except buttons, links, nav) to reveal — works across whole viewport
+document.addEventListener('click', (e) => {
+  if (revealed) return;
+  // Don't steal clicks from interactive elements
+  if (e.target.closest('button, a, input, textarea, .topbar, .shortcuts')) return;
+  reveal();
 });
 
 init().catch(err => {
