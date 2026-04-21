@@ -1,5 +1,5 @@
 // stats.js — dashboard with actual retention curve
-import { loadWords, loadState, isDue, computeRetentionCurve, escapeHtml } from './app.js';
+import { loadWords, loadState, isDue, computeRetentionCurve, escapeHtml, localDateKey } from './app.js';
 
 async function init() {
   const data = await loadWords();
@@ -150,14 +150,16 @@ function computeStreak(state) {
   const days = new Set();
   for (const id in state) {
     const lr = state[id]?.lastReview;
-    if (typeof lr === 'string' && lr.length >= 10) days.add(lr.slice(0, 10));
+    if (typeof lr === 'string') {
+      try { days.add(localDateKey(new Date(lr))); } catch {}
+    }
   }
   if (days.size === 0) return 0;
   let streak = 0;
   const today = new Date();
   for (let i = 0; i < 365; i++) {
-    const d = new Date(today.getTime() - i * 86400000).toISOString().slice(0, 10);
-    if (days.has(d)) streak++;
+    const d = new Date(today.getTime() - i * 86400000);
+    if (days.has(localDateKey(d))) streak++;
     else if (i > 0) break;
   }
   return streak;

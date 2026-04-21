@@ -272,8 +272,16 @@ export function playAudio(word) {
 // ---------- Daily plan ----------
 const PLAN_KEY_PREFIX = 'lexicon_plan_';
 
+/** YYYY-MM-DD in user's LOCAL timezone (not UTC). */
+export function localDateKey(date = new Date()) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
 function todayKey() {
-  return new Date().toISOString().slice(0, 10);
+  return localDateKey();
 }
 
 export function computeRetention14d(state) {

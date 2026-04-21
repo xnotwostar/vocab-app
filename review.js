@@ -2,7 +2,7 @@
 import {
   loadWords, loadState, setCardState, schedule, previewIntervals,
   playAudio, getTodayPlan, markPlanCompleted, computeRetention14d,
-  forgotRequeueOffset, escapeHtml
+  forgotRequeueOffset, escapeHtml, localDateKey
 } from './app.js';
 
 const WEEKDAYS_ZH = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
@@ -87,17 +87,22 @@ function renderPlanHeader(state) {
 }
 
 function computeStreak(state) {
+  // Convert each lastReview (UTC ISO) to user's local date
   const days = new Set();
   for (const id in state) {
     const lr = state[id]?.lastReview;
-    if (typeof lr === 'string' && lr.length >= 10) days.add(lr.slice(0, 10));
+    if (typeof lr === 'string') {
+      try {
+        days.add(localDateKey(new Date(lr)));
+      } catch {}
+    }
   }
   if (days.size === 0) return 0;
   let streak = 0;
   const today = new Date();
   for (let i = 0; i < 365; i++) {
-    const d = new Date(today.getTime() - i * 86400000).toISOString().slice(0, 10);
-    if (days.has(d)) streak++;
+    const d = new Date(today.getTime() - i * 86400000);
+    if (days.has(localDateKey(d))) streak++;
     else if (i > 0) break;
   }
   return streak;
