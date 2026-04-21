@@ -201,9 +201,31 @@ function renderCard() {
     fsrsMetaEl.textContent = 'NEW card';
   }
 
+  // Auto-fit the word to its container (prevent wrapping on long words)
+  fitWord();
+
   // Auto-play audio when card shows
   setTimeout(() => playAudio(w), 200);
 }
+
+function fitWord() {
+  const el = stage.querySelector('.word');
+  if (!el) return;
+  const parent = el.parentElement;
+  const maxWidth = parent.clientWidth - 20;
+  // Reset to CSS-computed size first, then shrink if needed
+  el.style.fontSize = '';
+  let size = parseFloat(getComputedStyle(el).fontSize);
+  const minSize = 20;
+  // Binary-ish shrink: measure and reduce
+  while (el.scrollWidth > maxWidth && size > minSize) {
+    size -= 2;
+    el.style.fontSize = size + 'px';
+  }
+}
+
+// Re-fit on resize (rotate device, change window size)
+window.addEventListener('resize', fitWord);
 
 function renderEnrichment(w) {
   if (!w.enriched) return '';
