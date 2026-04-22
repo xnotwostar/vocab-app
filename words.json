@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-04-20T03:41:33",
+  "generated_at": "2026-04-22T07:16:01",
   "source_file": "English/vocabulary-book.md",
   "count": 54,
   "words": [
@@ -35,7 +35,7 @@
         "proactively reach out",
         "proactively identify"
       ],
-      "memory_hook": "pro（主动）+ active（行动）→ 主动去做",
+      "memory_hook": "🏃‍♂️⏰ 跑在时钟前面 · pro+active",
       "enriched": true
     },
     {
@@ -69,7 +69,7 @@
         "anticipate counterarguments",
         "strong counterargument"
       ],
-      "memory_hook": "counter（反）+ argument（论据）= 对立的论点",
+      "memory_hook": "⚔️💬 话语间的利剑互砍 · counter 反",
       "enriched": true
     },
     {
@@ -102,7 +102,7 @@
         "anthropomorphic framing",
         "anthropomorphic bias"
       ],
-      "memory_hook": "anthropo（人）+ morphic（形状）= 长得像人 = 拟人化",
+      "memory_hook": "🤖👨 机器人长出人脸 · anthropo(人)+morph(形)",
       "enriched": true
     },
     {
@@ -136,7 +136,7 @@
         "navigate uncertainty",
         "navigate complexity"
       ],
-      "memory_hook": "navi（船）+ gate（驾驭）= 驾船穿行 → 穿越 / 处理",
+      "memory_hook": "🧭🚢 罗盘指挥船穿浪 · navi(船)+agate",
       "enriched": true
     },
     {
@@ -167,7 +167,7 @@
         "scientific notation",
         "Einstein notation"
       ],
-      "memory_hook": "note（记）+ -ation → 记号的系统",
+      "memory_hook": "🎼✍️ 把抽象符号写成乐谱 · note+ation",
       "enriched": true
     },
     {
@@ -201,7 +201,7 @@
         "misaligned with values",
         "misaligned incentives"
       ],
-      "memory_hook": "mis（错）+ align（队列） = 没站对队 = 偏离",
+      "memory_hook": "↗️↘️ 两队士兵反方向走，队列歪了 · mis(错)+align(队列)",
       "enriched": true
     },
     {
@@ -235,7 +235,7 @@
         "sycophancy toward",
         "model sycophancy"
       ],
-      "memory_hook": "sy-co-phan-cy：'死磕拍马屁'",
+      "memory_hook": "🐕👔🍬 穿西装的狗给老板递糖 · sy-co-phan-cy 死磕拍马屁",
       "enriched": true
     },
     {
@@ -265,7 +265,7 @@
         "positive/negative valence",
         "valence and arousal"
       ],
-      "memory_hook": "源自化学的'化合价'，引申为情感的'正负极'",
+      "memory_hook": "⚗️➕➖ 情感的化合价，正极吸引负极",
       "enriched": true
     },
     {
@@ -298,7 +298,7 @@
         "emotional arousal",
         "arousal level"
       ],
-      "memory_hook": "arouse → 唤起 → arousal = 被唤起的程度",
+      "memory_hook": "⚡🔔 警铃突然把人电醒 · arouse 唤起",
       "enriched": true
     },
     {
@@ -332,7 +332,7 @@
         "residual connection",
         "residual error"
       ],
-      "memory_hook": "re-（回）+ sid（坐）→ '坐下来没走的'= 剩余",
+      "memory_hook": "🪑⏳ 人走了椅子还在 · re-(回)sid(坐) 坐下来没走的",
       "enriched": true
     },
     {
@@ -365,7 +365,7 @@
         "high/low variance",
         "explain variance"
       ],
-      "memory_hook": "vary（变）+ ance → 变的度量 = 方差",
+      "memory_hook": "🎲🎲🎲 三颗骰子，每颗数字都不同 · vary 变化的度量",
       "enriched": true
     },
     {
@@ -394,7 +394,7 @@
         "prefill the prompt",
         "prefill phase"
       ],
-      "memory_hook": "pre + fill = 先填好",
+      "memory_hook": "🥣🍯 吃饭前先把碗填满",
       "enriched": true
     },
     {
@@ -420,7 +420,7 @@
         "cosine similarity",
         "cosine distance"
       ],
-      "memory_hook": "co-sine：另一个角的 sine",
+      "memory_hook": "🌊〰️ 余弦波浪，正弦的互补亲戚",
       "enriched": true
     },
     {
@@ -453,7 +453,7 @@
         "semantic search",
         "semantic similarity"
       ],
-      "memory_hook": "semantics = 语义学",
+      "memory_hook": "💭🔤 字母壳子里装着思想泡泡 · 语义",
       "enriched": true
     },
     {
@@ -486,7 +486,7 @@
         "lexical item",
         "lexical analysis"
       ],
-      "memory_hook": "lexicon（词典）+ al → 和词相关的",
+      "memory_hook": "📖✏️ 只盯字典上的字面 · lexicon+al",
       "enriched": true
     },
     {
@@ -516,7 +516,7 @@
         "neural circuitry",
         "brain circuitry"
       ],
-      "memory_hook": "circuit → circuitry = 一堆回路",
+      "memory_hook": "🔌⚡🧠 电路板长出神经元 · circuit 的集合",
       "enriched": true
     },
     {
@@ -549,7 +549,7 @@
         "control for confounds",
         "potential confounds"
       ],
-      "memory_hook": "con-（一起）+ fund（底）→ 底都混一起 = 混淆",
+      "memory_hook": "🌀🎭 几根线缠一起，分不清哪根是哪根 · con-(一起)fund(底)",
       "enriched": true
     },
     {
@@ -582,7 +582,7 @@
         "strong/weak correlation",
         "positive/negative correlation"
       ],
-      "memory_hook": "co- + relate → 共同关联 = 相关",
+      "memory_hook": "🔗📈 两根箭头手拉手一起涨 · co+relate",
       "enriched": true
     },
     {
@@ -610,7 +610,7 @@
         "on-policy data",
         "on-policy RL"
       ],
-      "memory_hook": "on the policy = 遵循当前策略",
+      "memory_hook": "🎯👣 紧跟当前策略的脚印走（RL 术语）",
       "enriched": true
     },
     {
@@ -639,7 +639,7 @@
         "steering experiment",
         "steering vector"
       ],
-      "memory_hook": "steer（驾驶）→ 操控模型的方向",
+      "memory_hook": "🎛️🧪 手握方向盘在实验室里调激活",
       "enriched": true
     },
     {
@@ -671,7 +671,7 @@
         "unembed matrix",
         "unembed layer"
       ],
-      "memory_hook": "un-（反）+ embed = 解嵌入",
+      "memory_hook": "📤🗜️ 把压缩包反向拆开 · un+embed",
       "enriched": true
     },
     {
@@ -704,7 +704,7 @@
         "upweighted tokens",
         "upweighted features"
       ],
-      "memory_hook": "up + weight = 权重向上调",
+      "memory_hook": "⚖️⬆️ 天平上砝码往上加",
       "enriched": true
     },
     {
@@ -732,7 +732,7 @@
         "subtract mean activation",
         "mean activation vector"
       ],
-      "memory_hook": "所有激活的平均值",
+      "memory_hook": "💡💡💡📊 所有灯泡亮度取平均",
       "enriched": true
     },
     {
@@ -765,7 +765,7 @@
         "underlie behavior",
         "principles that underlie"
       ],
-      "memory_hook": "under + lie = 躺在下面 = 构成底层基础",
+      "memory_hook": "🏗️⬇️ 躺在地基下面 · under+lie",
       "enriched": true
     },
     {
@@ -797,7 +797,7 @@
       "collocations": [
         "reminiscent of"
       ],
-      "memory_hook": "remind（提醒）→ reminiscent = 让人想起",
+      "memory_hook": "🕰️💭 老钟声响起，记忆涌回来 · re+mini(小)+scent",
       "enriched": true
     },
     {
@@ -831,7 +831,7 @@
         "generalize to",
         "generalize from"
       ],
-      "memory_hook": "general → generalize = 把具体变成一般",
+      "memory_hook": "🌳→🌲🌲🌲 从一棵树推到整片森林",
       "enriched": true
     },
     {
@@ -862,7 +862,7 @@
       "collocations": [
         "mediated by"
       ],
-      "memory_hook": "media（媒介）→ mediated = 通过媒介传递的",
+      "memory_hook": "🤝📮 两人中间有个传话人 · media 媒介",
       "enriched": true
     },
     {
@@ -896,7 +896,7 @@
         "operative word",
         "operative factor"
       ],
-      "memory_hook": "operate → operative = 在起作用的",
+      "memory_hook": "⚙️✅ 齿轮还在转 · operate 的形容词",
       "enriched": true
     },
     {
@@ -929,7 +929,7 @@
         "provoke a response",
         "provoke thought"
       ],
-      "memory_hook": "pro（前）+ voke（叫） = 把…叫出来 = 激起",
+      "memory_hook": "🐍🥢😡 拿棍子戳蛇，蛇怒起 · pro(前)+voke(叫) 把它叫出来",
       "enriched": true
     },
     {
@@ -962,7 +962,7 @@
         "evoke emotion",
         "evoke memories"
       ],
-      "memory_hook": "e-（向外）+ voke（叫） = 唤出来 = 唤起",
+      "memory_hook": "🎭💭 戴面具演戏，把观众情绪勾出来 · e(向外)+voke",
       "enriched": true
     },
     {
@@ -995,7 +995,7 @@
         "intuitively obvious",
         "intuitively appealing"
       ],
-      "memory_hook": "intuition（直觉）→ intuitively = 凭直觉地",
+      "memory_hook": "💡⚡ 直觉像闪电，先于思考",
       "enriched": true
     },
     {
@@ -1028,7 +1028,7 @@
         "negative/positive connotations",
         "cultural connotations"
       ],
-      "memory_hook": "con-（一起）+ notation（含义） = 附带的弦外之音",
+      "memory_hook": "🎭🔍 字面之下藏着另一层意思 · con(伴随)+notation",
       "enriched": true
     },
     {
@@ -1061,7 +1061,7 @@
         "a notable exception",
         "notable figure"
       ],
-      "memory_hook": "note-able = 值得记下来的",
+      "memory_hook": "✏️📝 值得用笔记下来 · note+able",
       "enriched": true
     },
     {
@@ -1095,7 +1095,7 @@
         "mitigate damage",
         "mitigate confounds"
       ],
-      "memory_hook": "mit-（温和）+ -igate → 使温和 = 减轻",
+      "memory_hook": "💧🔥→🔥 水浇火 → 火变小 · mit(温和)igate",
       "enriched": true
     },
     {
@@ -1128,7 +1128,7 @@
         "inspecting the activations",
         "closely inspecting"
       ],
-      "memory_hook": "in + spect = 往里看 = 检查",
+      "memory_hook": "🔍🔬 拿放大镜一点点看 · in+spect",
       "enriched": true
     },
     {
@@ -1161,7 +1161,7 @@
         "text snippets",
         "code snippets"
       ],
-      "memory_hook": "snip（剪一下）→ snippet = 剪下来的小片段",
+      "memory_hook": "✂️📄✂️ 剪刀咔嚓剪出小段 · snip+et",
       "enriched": true
     },
     {
@@ -1194,7 +1194,7 @@
         "elevated activation",
         "elevated levels"
       ],
-      "memory_hook": "elevator（电梯）→ elevated = 被升起的",
+      "memory_hook": "🎈⬆️ 气球把东西举起来",
       "enriched": true
     },
     {
@@ -1227,7 +1227,7 @@
         "propensity to",
         "propensity for"
       ],
-      "memory_hook": "pro-（前）+ pens（挂） → 向前倾 = 倾向",
+      "memory_hook": "🌳☀️ 树总朝太阳倾 · pro(前)+pens(挂) 向前倾的",
       "enriched": true
     },
     {
@@ -1260,7 +1260,7 @@
         "inclined to",
         "inclined toward"
       ],
-      "memory_hook": "incline（斜坡）→ inclined = 心里倾斜过去",
+      "memory_hook": "🛝↗️ 身子往一边倾斜 · incline 斜坡",
       "enriched": true
     },
     {
@@ -1290,7 +1290,7 @@
         "synthetic scenarios",
         "worst-case scenario"
       ],
-      "memory_hook": "scene（场景）→ scenarios = 一幕幕剧情",
+      "memory_hook": "🎬🎬🎬 一幕一幕的电影场景",
       "enriched": true
     },
     {
@@ -1323,7 +1323,7 @@
         "synthetic data",
         "synthetic scenarios"
       ],
-      "memory_hook": "syn-（一起）+ thetic（放置） = 合在一起 = 合成的",
+      "memory_hook": "🧪🤖 实验室合成出来的 · syn(一起)+thetic(放)",
       "enriched": true
     },
     {
@@ -1355,7 +1355,7 @@
         "numerical value",
         "numerical analysis"
       ],
-      "memory_hook": "number → numerical = 和数字相关的",
+      "memory_hook": "🔢🧮 算盘上的数字",
       "enriched": true
     },
     {
@@ -1388,7 +1388,7 @@
         "alternative hypothesis",
         "alternative route"
       ],
-      "memory_hook": "alter（改变）→ alternative = 另一个选择",
+      "memory_hook": "🔀🛤️ 岔路口的另一条路 · alter 另一个",
       "enriched": true
     },
     {
@@ -1419,7 +1419,7 @@
         "model dialogues",
         "open dialogues"
       ],
-      "memory_hook": "dia-（两个）+ logos（话） = 对话",
+      "memory_hook": "💬↔️💬 两人你来我往 · dia(之间)+logos(话)",
       "enriched": true
     },
     {
@@ -1452,7 +1452,7 @@
         "afflicted with",
         "afflicted by"
       ],
-      "memory_hook": "a-（向）+ flict（打击） = 被打击 = 受折磨的",
+      "memory_hook": "😷🌡️ 被病痛折磨 · a+flict(打击)",
       "enriched": true
     },
     {
@@ -1485,7 +1485,7 @@
         "gloomy mood",
         "gloomy atmosphere"
       ],
-      "memory_hook": "gloom（阴暗）+ -y = 阴郁的",
+      "memory_hook": "☁️😔 乌云盖顶的心情",
       "enriched": true
     },
     {
@@ -1518,7 +1518,7 @@
         "hostile response",
         "hostile takeover"
       ],
-      "memory_hook": "host（主人）的反义是 guest，但 hostile = '敌对的'（记反过来）",
+      "memory_hook": "🗡️😠 剑拔弩张的敌意",
       "enriched": true
     },
     {
@@ -1551,7 +1551,7 @@
         "neutral valence",
         "neutral party"
       ],
-      "memory_hook": "neu-（非）+ -tral → 两头都不 = 中立",
+      "memory_hook": "⚖️🕊️ 天平中间的白鸽 · neu(非)+tral 两头都不",
       "enriched": true
     },
     {
@@ -1582,7 +1582,7 @@
       "collocations": [
         "shallow pattern-matching vs understanding"
       ],
-      "memory_hook": "只看表面不看本质的'硬套模板'",
+      "memory_hook": "🪞👉 只看镜子表面，不看背后本质",
       "enriched": true
     },
     {
@@ -1615,7 +1615,7 @@
         "bundled together",
         "bundled pricing"
       ],
-      "memory_hook": "bundle（捆）→ bundled = 被捆在一起的",
+      "memory_hook": "📦🎀 礼盒打包捆一起",
       "enriched": true
     },
     {
@@ -1647,7 +1647,7 @@
         "price discrimination",
         "second-degree price discrimination"
       ],
-      "memory_hook": "对不同客户要不同价 = 价格歧视",
+      "memory_hook": "💰🎭 同样东西，对不同人戴不同价格面具",
       "enriched": true
     },
     {
@@ -1681,7 +1681,7 @@
         "cynical view",
         "cynical interpretation"
       ],
-      "memory_hook": "cyn- ~ 犬 → 犬儒主义 = 怀疑一切",
+      "memory_hook": "😒🧐 斜眼看：'你在骗我吧？' · 犬儒派（cyn=犬）",
       "enriched": true
     },
     {
@@ -1714,7 +1714,7 @@
         "insinuating that",
         "insinuating remark"
       ],
-      "memory_hook": "in-（里面）+ sinu-（弯曲）→ 拐弯抹角地说 = 暗示",
+      "memory_hook": "😏👆 不明说，挤眉弄眼暗示 · in+sinu(弯曲) 拐弯进",
       "enriched": true
     },
     {
@@ -1746,9 +1746,9 @@
         "already done",
         "already there"
       ],
-      "memory_hook": "all-ready = 全就位 = 已经",
+      "memory_hook": "⏰✨ 钟表闪亮 —— 事已至此 · all+ready",
       "enriched": true
     }
   ],
-  "enriched_at": "2026-04-20T10:00:00"
+  "enriched_at": "2026-04-21T10:00:00"
 }
