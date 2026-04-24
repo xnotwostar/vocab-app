@@ -1149,5 +1149,552 @@
       "Einstein notation"
     ],
     "memory_hook": "🎼✍️ 把抽象符号写成乐谱 · note+ation"
+  },
+  "tenable": {
+    "synonyms": [
+      "defensible",
+      "sustainable",
+      "justifiable"
+    ],
+    "antonyms": [
+      "untenable",
+      "indefensible"
+    ],
+    "etymology": "拉丁语 tenere（持有）→ 可以守住的",
+    "examples": [
+      "His position is no longer tenable after the new evidence.",
+      "Is the hypothesis still tenable given these results?",
+      "The fortress was no longer tenable under siege."
+    ],
+    "collocations": [
+      "tenable position",
+      "no longer tenable",
+      "tenable hypothesis"
+    ],
+    "memory_hook": "🏰🛡️ 站得住脚的城堡 · ten(持有)+able 能被守住的"
+  },
+  "consistent": {
+    "synonyms": [
+      "coherent",
+      "uniform",
+      "steady"
+    ],
+    "antonyms": [
+      "inconsistent",
+      "contradictory"
+    ],
+    "etymology": "拉丁语 consistere（站在一起）→ con-(一起)+sist(站)",
+    "examples": [
+      "Results are consistent across all experiments.",
+      "Her behavior is consistent with what she said.",
+      "Maintain a consistent tone throughout the paper."
+    ],
+    "collocations": [
+      "consistent with",
+      "consistent results"
+    ],
+    "memory_hook": "🧱🧱🧱 砖块整齐地一起立着 · con(一起)+sist(站)"
+  },
+  "vector-directions": {
+    "synonyms": [
+      "activation directions",
+      "feature directions"
+    ],
+    "antonyms": [],
+    "etymology": "vector（向量）+ direction（方向）",
+    "examples": [
+      "Emotion vectors point in specific vector directions in latent space.",
+      "Different concepts occupy different vector directions.",
+      "Steering experiments add signals along specific vector directions."
+    ],
+    "collocations": [
+      "specific vector directions",
+      "along vector directions"
+    ],
+    "memory_hook": "🧭➡️↗️↘️ 激活空间里的语义罗盘"
+  },
+  "sanity": {
+    "synonyms": [
+      "rationality",
+      "soundness"
+    ],
+    "antonyms": [
+      "insanity",
+      "madness"
+    ],
+    "etymology": "拉丁语 sanitas（健康）→ 心智健康",
+    "examples": [
+      "Let's run a sanity check before shipping.",
+      "The long hours tested my sanity.",
+      "Sanity returns when you step away and come back fresh."
+    ],
+    "collocations": [
+      "sanity check",
+      "keep one's sanity"
+    ],
+    "memory_hook": "🧠✅ sanity check = 大脑自检 · san(健康)"
+  },
+  "elation": {
+    "synonyms": [
+      "euphoria",
+      "jubilation",
+      "exhilaration"
+    ],
+    "antonyms": [
+      "despair",
+      "depression"
+    ],
+    "etymology": "拉丁语 elatus（举起来）→ e-(向外)+latus(带)",
+    "examples": [
+      "She felt a surge of elation after the victory.",
+      "Elation filled the room when the news arrived.",
+      "The model showed activations reminiscent of elation."
+    ],
+    "collocations": [
+      "surge of elation",
+      "feelings of elation"
+    ],
+    "memory_hook": "🎉🚀 情绪被举到天上 · e(出)+lat(举) 被抬起来"
+  },
+  "melancholy": {
+    "synonyms": [
+      "sadness",
+      "sorrow",
+      "gloom"
+    ],
+    "antonyms": [
+      "joy",
+      "cheerfulness"
+    ],
+    "etymology": "希腊语 melas(黑)+kholē(胆汁) → 黑胆汁（古代四体液说）",
+    "examples": [
+      "A quiet melancholy filled the autumn afternoon.",
+      "His music captures a profound melancholy.",
+      "Melancholy differs from depression — it can be beautiful."
+    ],
+    "collocations": [
+      "deep melancholy",
+      "quiet melancholy"
+    ],
+    "memory_hook": "🖤🫗 黑色胆汁 · melas(黑)+kholē(胆) 古希腊医学"
+  },
+  "taxonomies": {
+    "synonyms": [
+      "classifications",
+      "categorizations"
+    ],
+    "antonyms": [],
+    "etymology": "希腊语 taxis(排列)+nomia(规则) → 分类规则",
+    "examples": [
+      "Emotion taxonomies vary across cultures.",
+      "The field has competing taxonomies.",
+      "A new taxonomy emerged from the clustering analysis."
+    ],
+    "collocations": [
+      "emotion taxonomies",
+      "competing taxonomies"
+    ],
+    "memory_hook": "🗂️📚 分门别类装进柜子 · taxis(排)+nomia(法)"
+  },
+  "contentment": {
+    "synonyms": [
+      "satisfaction",
+      "fulfillment",
+      "peace"
+    ],
+    "antonyms": [
+      "discontent",
+      "dissatisfaction"
+    ],
+    "etymology": "拉丁语 contentus（满足的）→ 被容纳的",
+    "examples": [
+      "Contentment is different from happiness — it's quieter.",
+      "She lives a life of quiet contentment.",
+      "True contentment comes from within."
+    ],
+    "collocations": [
+      "quiet contentment",
+      "sense of contentment"
+    ],
+    "memory_hook": "😌🍵 静静地喝茶 · content(容纳) 心被装满了"
+  },
+  "aligns-with": {
+    "synonyms": [
+      "matches",
+      "corresponds to",
+      "agrees with"
+    ],
+    "antonyms": [
+      "conflicts with",
+      "contradicts"
+    ],
+    "etymology": "align (对齐) + with",
+    "examples": [
+      "The output aligns with the expected behavior.",
+      "Her values align with the company's mission.",
+      "Does the data align with the theory?"
+    ],
+    "collocations": [
+      "aligns with values",
+      "aligns with findings"
+    ],
+    "memory_hook": "↔️✅ 两条线对齐了 · align+with"
+  },
+  "alignment": {
+    "synonyms": [
+      "consistency",
+      "adjustment",
+      "conformity"
+    ],
+    "antonyms": [
+      "misalignment",
+      "deviation"
+    ],
+    "etymology": "align + -ment (名词化)",
+    "examples": [
+      "AI alignment is one of the hardest open problems.",
+      "The car needs wheel alignment.",
+      "Check alignment between goals and incentives."
+    ],
+    "collocations": [
+      "AI alignment",
+      "goal alignment"
+    ],
+    "memory_hook": "🎯📐 瞄准线对齐 · align 的名词"
+  },
+  "coarsely": {
+    "synonyms": [
+      "roughly",
+      "crudely",
+      "broadly"
+    ],
+    "antonyms": [
+      "finely",
+      "precisely"
+    ],
+    "etymology": "coarse(粗) + -ly",
+    "examples": [
+      "Emotions can be coarsely grouped by valence.",
+      "Chop the vegetables coarsely.",
+      "The map is coarsely drawn but accurate."
+    ],
+    "collocations": [
+      "coarsely clustered",
+      "coarsely grained"
+    ],
+    "memory_hook": "🪨🧂 粗粒盐 · coarse(粗糙)"
+  },
+  "affective-circumplex": {
+    "synonyms": [
+      "valence-arousal model",
+      "emotional circle"
+    ],
+    "antonyms": [],
+    "etymology": "affective(情感的) + circumplex(圆环结构)",
+    "examples": [
+      "Russell's affective circumplex plots emotions on a 2D plane.",
+      "The paper maps model emotions onto the affective circumplex.",
+      "Valence (x-axis) and arousal (y-axis) form the affective circumplex."
+    ],
+    "collocations": [
+      "Russell's affective circumplex"
+    ],
+    "memory_hook": "⭕💗 情感的圆形地图 · valence×arousal 两轴"
+  },
+  "portion": {
+    "synonyms": [
+      "part",
+      "share",
+      "segment"
+    ],
+    "antonyms": [
+      "whole",
+      "total"
+    ],
+    "etymology": "拉丁语 portio（一份）",
+    "examples": [
+      "A large portion of the dataset was mislabeled.",
+      "Serve yourself a small portion.",
+      "Only a portion of the variance is explained."
+    ],
+    "collocations": [
+      "a portion of",
+      "large/small portion"
+    ],
+    "memory_hook": "🍰✂️ 切一块蛋糕 · port(携带) 可以拿走的一份"
+  },
+  "corroborate": {
+    "synonyms": [
+      "confirm",
+      "support",
+      "substantiate"
+    ],
+    "antonyms": [
+      "refute",
+      "contradict"
+    ],
+    "etymology": "拉丁语 cor-(共同)+robur(强壮) → 一起加强",
+    "examples": [
+      "Independent evidence corroborates the hypothesis.",
+      "His story is corroborated by two witnesses.",
+      "More experiments are needed to corroborate the finding."
+    ],
+    "collocations": [
+      "evidence corroborates",
+      "corroborate findings"
+    ],
+    "memory_hook": "🤝💪 两人合力把论据加强 · co-(共)+robur(强)"
+  },
+  "substantially": {
+    "synonyms": [
+      "significantly",
+      "considerably",
+      "largely"
+    ],
+    "antonyms": [
+      "slightly",
+      "marginally"
+    ],
+    "etymology": "substance(实质) + -ally",
+    "examples": [
+      "Results differ substantially between conditions.",
+      "The new method is substantially faster.",
+      "He substantially revised the draft."
+    ],
+    "collocations": [
+      "substantially different",
+      "substantially higher"
+    ],
+    "memory_hook": "🏗️📊 substance(实质) → 实质性地 = 显著"
+  },
+  "distinguish": {
+    "synonyms": [
+      "differentiate",
+      "tell apart",
+      "discern"
+    ],
+    "antonyms": [
+      "confuse",
+      "conflate"
+    ],
+    "etymology": "拉丁语 dis-(分开)+stinguere(刺) → 刺开",
+    "examples": [
+      "Can you distinguish a paper from a blog post?",
+      "It's hard to distinguish between correlation and causation.",
+      "She can distinguish subtle wine flavors."
+    ],
+    "collocations": [
+      "distinguish X from Y",
+      "distinguish between"
+    ],
+    "memory_hook": "🔪📍 用针尖把两物分开 · dis(分)+stinguere(刺)"
+  },
+  "colon": {
+    "synonyms": [],
+    "antonyms": [],
+    "etymology": "希腊语 kōlon（肢体、段落）",
+    "examples": [
+      "Use a colon to introduce a list: apples, pears, oranges.",
+      "The prefix and suffix are separated by a colon.",
+      "(Also means 结肠 in anatomy)"
+    ],
+    "collocations": [
+      "followed by a colon",
+      "after the colon"
+    ],
+    "memory_hook": "➕➕ 竖着两点的标点 `:` · 也是结肠"
+  },
+  "scoped": {
+    "synonyms": [
+      "bounded",
+      "restricted",
+      "limited"
+    ],
+    "antonyms": [
+      "global",
+      "unbounded"
+    ],
+    "etymology": "scope(范围) + -ed",
+    "examples": [
+      "This variable is scoped to the function.",
+      "A scoped experiment controls confounds.",
+      "Block-scoped variables don't leak outside braces."
+    ],
+    "collocations": [
+      "scoped to",
+      "block-scoped",
+      "function-scoped"
+    ],
+    "memory_hook": "🔭🖼️ 用望远镜限定视野 · scope 的过去分词"
+  },
+  "laden": {
+    "synonyms": [
+      "filled",
+      "loaded",
+      "burdened"
+    ],
+    "antonyms": [
+      "empty",
+      "unburdened"
+    ],
+    "etymology": "load(装载) 的古英语过去分词",
+    "examples": [
+      "The sentence is laden with emotion.",
+      "Their words were laden with meaning.",
+      "Emotion-laden memories stick better."
+    ],
+    "collocations": [
+      "laden with",
+      "emotion-laden",
+      "meaning-laden"
+    ],
+    "memory_hook": "📦🐪 骆驼驮满货 · lade(装)+n 装满的"
+  },
+  "perceived": {
+    "synonyms": [
+      "sensed",
+      "recognized",
+      "noticed"
+    ],
+    "antonyms": [
+      "ignored",
+      "unnoticed"
+    ],
+    "etymology": "拉丁语 per-(彻底)+capere(抓住) → 抓住信息",
+    "examples": [
+      "The perceived threat was overblown.",
+      "Perceived social status affects behavior.",
+      "The model's perceived emotion varies by context."
+    ],
+    "collocations": [
+      "perceived threat",
+      "perceived value"
+    ],
+    "memory_hook": "👁️🎯 perceive 的过去分词 · 被感知到的"
+  },
+  "prefix": {
+    "synonyms": [
+      "preposition",
+      "prepend"
+    ],
+    "antonyms": [
+      "suffix"
+    ],
+    "etymology": "pre-(前)+fix(固定) → 固定在前面",
+    "examples": [
+      "A prefix token sets the context for the LLM.",
+      "The word 'unhappy' has the prefix 'un-'.",
+      "Add `Mr.` as a prefix to names."
+    ],
+    "collocations": [
+      "prefix token",
+      "prefix sum",
+      "prefix match"
+    ],
+    "memory_hook": "🔜📌 固定在前 · pre(前)+fix(钉)"
+  },
+  "suffix": {
+    "synonyms": [
+      "ending",
+      "append"
+    ],
+    "antonyms": [
+      "prefix"
+    ],
+    "etymology": "sub-(下)+fix(固定) → 固定在下 / 后",
+    "examples": [
+      "Append a suffix token to mark the end.",
+      "The suffix '-ly' often makes adjectives into adverbs.",
+      "Add `.tar.gz` as a suffix."
+    ],
+    "collocations": [
+      "suffix token",
+      "file suffix"
+    ],
+    "memory_hook": "🔚📌 固定在后 · sub(下)+fix(钉)"
+  },
+  "pronounced": {
+    "synonyms": [
+      "marked",
+      "noticeable",
+      "striking"
+    ],
+    "antonyms": [
+      "subtle",
+      "faint"
+    ],
+    "etymology": "pronounce(宣告) 过去分词 → '被宣告出来的' → 显著",
+    "examples": [
+      "The effect is especially pronounced in longer prompts.",
+      "She has a pronounced limp.",
+      "Pronounced differences between groups."
+    ],
+    "collocations": [
+      "pronounced effect",
+      "pronounced difference"
+    ],
+    "memory_hook": "📣⚡ 被大声宣告的 → 显著明显"
+  },
+  "sentiment": {
+    "synonyms": [
+      "feeling",
+      "attitude",
+      "opinion"
+    ],
+    "antonyms": [],
+    "etymology": "拉丁语 sentire（感觉） → sens 感知",
+    "examples": [
+      "Market sentiment turned bearish overnight.",
+      "Sentiment analysis detects emotional tone in text.",
+      "Public sentiment shifted after the news."
+    ],
+    "collocations": [
+      "market sentiment",
+      "sentiment analysis",
+      "public sentiment"
+    ],
+    "memory_hook": "💭📊 感觉的集合 · sentire(感知) 的情绪"
+  },
+  "dosage": {
+    "synonyms": [
+      "dose",
+      "amount",
+      "quantity"
+    ],
+    "antonyms": [],
+    "etymology": "dose(剂量) + -age",
+    "examples": [
+      "Steering dosage controls intervention strength.",
+      "Adjust the dosage based on symptoms.",
+      "At higher dosage, the effect becomes pronounced."
+    ],
+    "collocations": [
+      "steering dosage",
+      "daily dosage",
+      "high/low dosage"
+    ],
+    "memory_hook": "💊⚗️ 一剂的量 · dose+age 剂量"
+  },
+  "reassurance": {
+    "synonyms": [
+      "comfort",
+      "consolation",
+      "encouragement"
+    ],
+    "antonyms": [
+      "anxiety",
+      "worry"
+    ],
+    "etymology": "re-(再)+assure(保证)+-ance → 再次保证",
+    "examples": [
+      "She offered quiet reassurance when he doubted himself.",
+      "The model seeks constant reassurance.",
+      "A few words of reassurance can calm a whole team."
+    ],
+    "collocations": [
+      "offer reassurance",
+      "seek reassurance"
+    ],
+    "memory_hook": "🤗💞 再次保证你没事 · re+assure"
   }
 }
