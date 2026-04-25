@@ -12,6 +12,12 @@ let queue = [];
 let plan = null;
 let currentIdx = 0;
 let revealed = false;
+let userHasInteracted = false;  // iOS Safari blocks autoplay before user gesture
+
+// Mark user interaction (any click, tap, or keypress)
+['pointerdown', 'keydown', 'touchstart'].forEach(evt => {
+  document.addEventListener(evt, () => { userHasInteracted = true; }, { once: true });
+});
 
 const stage = document.getElementById('stage');
 const fsrsMetaEl = document.getElementById('fsrs-meta');
@@ -204,8 +210,11 @@ function renderCard() {
   // Auto-fit the word to its container (prevent wrapping on long words)
   fitWord();
 
-  // Auto-play audio when card shows
-  setTimeout(() => playAudio(w), 200);
+  // Auto-play audio when card shows — but only after first user interaction
+  // (iOS Safari blocks audio.play() called from setTimeout without prior user gesture)
+  if (userHasInteracted) {
+    setTimeout(() => playAudio(w), 200);
+  }
 }
 
 function fitWord() {
